@@ -8,8 +8,8 @@
  *  Date          : $Date$
  *  Author        : $Author$
  *  Created By    : Robert Heller
- *  Created       : Wed Apr 20 14:22:34 2022
- *  Last Modified : <220420.1424>
+ *  Created       : Wed Apr 20 14:35:13 2022
+ *  Last Modified : <220420.1506>
  *
  *  Description	
  *
@@ -42,17 +42,37 @@
  ****************************************************************************/
 
 // No direct access to this file
-defined('_JEXEC') or die('Restricted access');
-
-// import joomla controller library
-jimport('joomla.application.component.controller');
-
-// Get an instance of the controller prefixed by TownOffical
-$controller = JControllerLegacy::getInstance('TownOffical');
-
-// Perform the Request task
-$controller->execute(JFactory::getApplication()->input->get('task'));
-
-// Redirect if set by the controller
-$controller->redirect();
-
+defined('_JEXEC') or die('Restricted Access');
+?>
+<?php foreach ($this->items as $i => $row): ?>
+<tr class="row<?php echo $i % 2; ?>">
+  <td>
+    <?php echo $this->pagination->getRowOffset($i); ?>
+  </td>
+  <td>
+    <?php echo JHtml::_('grid.id', $i, $row->id); ?>
+  </td>
+  
+  <td>
+    <?php echo $row->office; ?>
+  </td>
+  <td>
+    <?php echo $row->name; ?>
+  </td>
+  <td>
+    <?php echo $row->auxoffice; ?>
+  </td>
+  <td>
+    <?php echo $row->termends; ?>
+  </td>
+  <td>
+    <?php echo $row->iselected; ?>
+  </td>
+  <td align="center">
+    <?php echo JHtml::_('jgrid.published', $row->published, $i, 'townofficials.', true, 'cb'); ?>
+  </td>
+  <td align="center">
+    <?php echo $row->id; ?>
+  </td>
+</tr>
+<?php endforeach; ?>

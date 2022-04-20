@@ -8,8 +8,8 @@
  *  Date          : $Date$
  *  Author        : $Author$
  *  Created By    : Robert Heller
- *  Created       : Wed Apr 20 14:22:34 2022
- *  Last Modified : <220420.1424>
+ *  Created       : Wed Apr 20 14:29:20 2022
+ *  Last Modified : <220420.1506>
  *
  *  Description	
  *
@@ -42,17 +42,16 @@
  ****************************************************************************/
 
 // No direct access to this file
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die('Restricted Access');
 
-// import joomla controller library
-jimport('joomla.application.component.controller');
-
-// Get an instance of the controller prefixed by TownOffical
-$controller = JControllerLegacy::getInstance('TownOffical');
-
-// Perform the Request task
-$controller->execute(JFactory::getApplication()->input->get('task'));
-
-// Redirect if set by the controller
-$controller->redirect();
+// load tooltip behavior
+JHtml::_('behavior.tooltip');
+?>
+<form action="<?php echo JRoute::_('index.php?option=com_townoffical'); ?>" method="post" name="adminForm" id="adminForm">
+	<table class="adminlist">
+		<thead><?php echo $this->loadTemplate('head'); ?></thead>
+		<tfoot><?php echo $this->loadTemplate('foot'); ?></tfoot>
+		<tbody><?php echo $this->loadTemplate('body'); ?></tbody>
+	</table>
+</form>
 

@@ -8,8 +8,8 @@
  *  Date          : $Date$
  *  Author        : $Author$
  *  Created By    : Robert Heller
- *  Created       : Wed Apr 20 14:22:34 2022
- *  Last Modified : <220420.1424>
+ *  Created       : Wed Apr 20 14:32:22 2022
+ *  Last Modified : <220420.1434>
  *
  *  Description	
  *
@@ -41,18 +41,33 @@
  *
  ****************************************************************************/
 
-// No direct access to this file
-defined('_JEXEC') or die('Restricted access');
-
-// import joomla controller library
-jimport('joomla.application.component.controller');
-
-// Get an instance of the controller prefixed by TownOffical
-$controller = JControllerLegacy::getInstance('TownOffical');
-
-// Perform the Request task
-$controller->execute(JFactory::getApplication()->input->get('task'));
-
-// Redirect if set by the controller
-$controller->redirect();
-
+// No direct access to this file                                                         
+defined('_JEXEC') or die('Restricted Access');
+?>
+<tr>
+    <th width="1%"><?php echo JText::_('COM_TOWNOFFICAL_NUM'); ?></th>
+    <th width="2%">
+    <?php echo JHtml::_('grid.checkall'); ?>
+    </th>
+    <th width="20%">
+    <?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_OFFICE') ;?>
+    </th>
+    <th width="20%">
+    <?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_NAME') ;?>
+    </th>
+    <th width="10%">
+    <?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_AUXOFFICE') ;?>
+    </th>
+    <th width="15%">
+    <?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_TERMENDS') ;?>
+    </th>
+    <th width="5%">
+    <?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_ISELECTED') ;?>
+    </th>
+    <th width="5%">
+    <?php echo JText::_('COM_TOWNOFFICAL_PUBLISHED'); ?>
+    </th>
+    <th width="2%">
+    <?php echo JText::_('COM_TOWNOFFICAL_ID'); ?>
+    </th>
+</tr>

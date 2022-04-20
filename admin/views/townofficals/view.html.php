@@ -8,8 +8,8 @@
  *  Date          : $Date$
  *  Author        : $Author$
  *  Created By    : Robert Heller
- *  Created       : Wed Apr 20 14:22:34 2022
- *  Last Modified : <220420.1424>
+ *  Created       : Wed Apr 20 14:26:51 2022
+ *  Last Modified : <220420.1504>
  *
  *  Description	
  *
@@ -44,15 +44,38 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
-// import joomla controller library
-jimport('joomla.application.component.controller');
+// import Joomla view library
+jimport('joomla.application.component.view');
 
-// Get an instance of the controller prefixed by TownOffical
-$controller = JControllerLegacy::getInstance('TownOffical');
-
-// Perform the Request task
-$controller->execute(JFactory::getApplication()->input->get('task'));
-
-// Redirect if set by the controller
-$controller->redirect();
-
+/**
+  * TownOfficals View
+  *
+  * @since  0.0.1
+  */
+class TownOfficalViewTownOfficals extends JViewLegacy
+{
+  /**
+    * Display the Town Officals view
+    *
+    * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
+    *
+    * @return  void
+    */
+  function display($tpl = null)
+  {
+    // Get data from the model
+    $this->items= $this->get('Items');
+    $this->pagination= $this->get('Pagination');
+    
+    // Check for errors.
+    if (count($errors = $this->get('Errors')))
+    {
+      JError::raiseError(500, implode('<br />', $errors));
+      
+      return false;
+    }
+    
+    // Display the template
+    parent::display($tpl);
+  }
+}

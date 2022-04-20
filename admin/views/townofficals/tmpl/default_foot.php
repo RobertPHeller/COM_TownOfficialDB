@@ -8,8 +8,8 @@
  *  Date          : $Date$
  *  Author        : $Author$
  *  Created By    : Robert Heller
- *  Created       : Wed Apr 20 14:22:34 2022
- *  Last Modified : <220420.1424>
+ *  Created       : Wed Apr 20 14:37:04 2022
+ *  Last Modified : <220420.1440>
  *
  *  Description	
  *
@@ -42,17 +42,13 @@
  ****************************************************************************/
 
 // No direct access to this file
-defined('_JEXEC') or die('Restricted access');
-
-// import joomla controller library
-jimport('joomla.application.component.controller');
-
-// Get an instance of the controller prefixed by TownOffical
-$controller = JControllerLegacy::getInstance('TownOffical');
-
-// Perform the Request task
-$controller->execute(JFactory::getApplication()->input->get('task'));
-
-// Redirect if set by the controller
-$controller->redirect();
+defined('_JEXEC') or die('Restricted Access');
+?>
+<tfoot>
+<tr>
+  <td colspan="9">
+    <?php echo $this->pagination->getListFooter(); ?>
+  </td>
+</tr>
+</tfoot>
 

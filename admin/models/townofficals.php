@@ -8,8 +8,8 @@
  *  Date          : $Date$
  *  Author        : $Author$
  *  Created By    : Robert Heller
- *  Created       : Wed Apr 20 14:22:34 2022
- *  Last Modified : <220420.1424>
+ *  Created       : Wed Apr 20 14:43:11 2022
+ *  Last Modified : <220420.1444>
  *
  *  Description	
  *
@@ -44,15 +44,28 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
-// import joomla controller library
-jimport('joomla.application.component.controller');
-
-// Get an instance of the controller prefixed by TownOffical
-$controller = JControllerLegacy::getInstance('TownOffical');
-
-// Perform the Request task
-$controller->execute(JFactory::getApplication()->input->get('task'));
-
-// Redirect if set by the controller
-$controller->redirect();
-
+/**
+  * TownOfficalList Model
+  *
+  * @since  0.0.1
+  */
+class TownOfficalModelTownOfficals extends JModelList
+{
+  /**
+    * Method to build an SQL query to load the list data.
+    *
+    * @return      string  An SQL query
+    */
+  protected function getListQuery()
+  {
+    // Initialize variables.
+    $db    = JFactory::getDbo();
+    $query = $db->getQuery(true);
+    
+    // Create the base select statement.
+    $query->select('*')
+    ->from($db->quoteName('#__townoffical'));
+    
+    return $query;
+  }
+}

@@ -2,7 +2,7 @@
 <!--
     Created By    : Robert Heller
     Created       : Wed Apr 20 12:48:00 2022
-    Last Modified : <220420.1354>
+    Last Modified : <220420.1501>
 
     Description	
     
@@ -36,9 +36,19 @@
   <copyright>(C) Copyright 2022 Robert Heller</copyright>
   <license>GPL 2.0 or later</license>
   <!--  The version string is recorded in the components table -->
-  <version>0.0.6</version>
+  <version>0.0.7</version>
   <!-- The description is optional and defaults to the name -->
   <description>Town Officials</description>
+  <install> <!-- Runs on install -->
+    <sql>
+      <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+    </sql>
+  </install>
+  <uninstall> <!-- Runs on uninstall -->
+    <sql>
+      <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+    </sql>
+  </uninstall>
   <update> <!-- Runs on update; New since J2.5 -->
     <schemas>
       <schemapath type="mysql">sql/updates/mysql</schemapath>
@@ -67,12 +77,14 @@
       <!-- Admin Main File Copy Section -->
       <filename>index.html</filename>
       <filename>townoffical.php</filename>
+      <filename>controller.php</filename>
       <!-- SQL files section -->
       <folder>sql</folder>
       <!-- tables files section -->
       <folder>tables</folder>
       <!-- models files section -->
       <folder>models</folder>
+      <folder>views</folder>
     </files>
   </administration>
   
