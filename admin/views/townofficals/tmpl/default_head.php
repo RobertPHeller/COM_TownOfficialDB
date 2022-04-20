@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:32:22 2022
- *  Last Modified : <220420.1434>
+ *  Last Modified : <220420.1618>
  *
  *  Description	
  *
@@ -45,29 +45,29 @@
 defined('_JEXEC') or die('Restricted Access');
 ?>
 <tr>
-    <th width="1%"><?php echo JText::_('COM_TOWNOFFICAL_NUM'); ?></th>
-    <th width="2%">
-    <?php echo JHtml::_('grid.checkall'); ?>
-    </th>
-    <th width="20%">
-    <?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_OFFICE') ;?>
-    </th>
-    <th width="20%">
-    <?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_NAME') ;?>
-    </th>
-    <th width="10%">
-    <?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_AUXOFFICE') ;?>
-    </th>
-    <th width="15%">
-    <?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_TERMENDS') ;?>
-    </th>
-    <th width="5%">
-    <?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_ISELECTED') ;?>
-    </th>
-    <th width="5%">
-    <?php echo JText::_('COM_TOWNOFFICAL_PUBLISHED'); ?>
-    </th>
-    <th width="2%">
-    <?php echo JText::_('COM_TOWNOFFICAL_ID'); ?>
-    </th>
+  <th>#</th>
+  <th width="2%">
+  <?php echo JHtml::_('grid.checkall'); ?>
+  </th>
+  <th width="20%">
+  <?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_OFFICE') ;?>
+  </th>
+  <th width="20%">
+  <?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_NAME') ;?>
+  </th>
+  <th width="10%">
+  <?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_AUXOFFICE') ;?>
+  </th>
+  <th width="15%">
+  <?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_TERMENDS') ;?>
+  </th>
+  <th width="5%">
+  <?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_ISELECTED') ;?>
+  </th>
+  <th width="5%">
+  <?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_PUBLISHED'); ?>
+  </th>
+  <th width="2%">
+  <?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_ID'); ?>
+  </th>
 </tr>

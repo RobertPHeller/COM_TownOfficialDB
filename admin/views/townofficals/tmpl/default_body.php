@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:35:13 2022
- *  Last Modified : <220420.1506>
+ *  Last Modified : <220420.1546>
  *
  *  Description	
  *
@@ -52,7 +52,6 @@ defined('_JEXEC') or die('Restricted Access');
   <td>
     <?php echo JHtml::_('grid.id', $i, $row->id); ?>
   </td>
-  
   <td>
     <?php echo $row->office; ?>
   </td>
