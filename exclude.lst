@@ -1,0 +1,11 @@
+.gitignore
+makeinstall.sh
+exclude.lst
+*~
+.git/*
+*.zip
+admin-orig/*
+site-orig/*
+townofficials.xml-orig
+*.list
+*.tcl

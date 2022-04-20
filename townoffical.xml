@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    Created By    : Robert Heller
+    Created       : Wed Apr 20 12:48:00 2022
+    Last Modified : <220420.1354>
+
+    Description	
+    
+    Copyright (C) 2022  Robert Heller D/B/A Deepwoods Software
+			51 Locke Hill Road
+			Wendell, MA 01379-9728
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+ 
+    -->
+<extension type="component" version="3.0" method="upgrade">
+  <name>Town Offical</name>
+  <!-- The following elements are optional and free of formatting constraints -->
+  <creationDate>April 2022</creationDate>
+  <author>Robert Heller</author>
+  <authorEmail>heller@deepsoft.com</authorEmail>
+  <authorUrl>https://www.deepsoft.com/</authorUrl>
+  <copyright>(C) Copyright 2022 Robert Heller</copyright>
+  <license>GPL 2.0 or later</license>
+  <!--  The version string is recorded in the components table -->
+  <version>0.0.6</version>
+  <!-- The description is optional and defaults to the name -->
+  <description>Town Officials</description>
+  <update> <!-- Runs on update; New since J2.5 -->
+    <schemas>
+      <schemapath type="mysql">sql/updates/mysql</schemapath>
+    </schemas>
+  </update>
+  <!-- Site Main File Copy Section -->
+  <!-- Note the folder attribute: This attribute describes the folder
+      to copy FROM in the package to install therefore files copied
+      in this section are copied from /site/ in the package -->
+  <files folder="site">
+    <filename>index.html</filename>
+    <filename>townoffical.php</filename>
+    <filename>controller.php</filename>
+    <folder>views</folder>
+    <folder>models</folder>
+  </files>
+  
+  <administration>
+    <!-- Administration Menu Section -->
+    <menu link='index.php?option=com_townoffical'>Town Officals</menu>
+    <!-- Administration Main File Copy Section -->
+    <!-- Note the folder attribute: This attribute describes the folder
+        to copy FROM in the package to install therefore files copied
+        in this section are copied from /admin/ in the package -->
+    <files folder="admin">
+      <!-- Admin Main File Copy Section -->
+      <filename>index.html</filename>
+      <filename>townoffical.php</filename>
+      <!-- SQL files section -->
+      <folder>sql</folder>
+      <!-- tables files section -->
+      <folder>tables</folder>
+      <!-- models files section -->
+      <folder>models</folder>
+    </files>
+  </administration>
+  
+</extension>
