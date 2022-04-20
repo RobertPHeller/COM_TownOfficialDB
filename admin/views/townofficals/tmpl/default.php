@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:29:20 2022
- *  Last Modified : <220420.1506>
+ *  Last Modified : <220420.1633>
  *
  *  Description	
  *
@@ -48,10 +48,13 @@ defined('_JEXEC') or die('Restricted Access');
 JHtml::_('behavior.tooltip');
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_townoffical'); ?>" method="post" name="adminForm" id="adminForm">
-	<table class="adminlist">
-		<thead><?php echo $this->loadTemplate('head'); ?></thead>
-		<tfoot><?php echo $this->loadTemplate('foot'); ?></tfoot>
-		<tbody><?php echo $this->loadTemplate('body'); ?></tbody>
-	</table>
+  <table class="adminlist">
+    <thead><?php echo $this->loadTemplate('head'); ?></thead>
+    <tfoot><?php echo $this->loadTemplate('foot'); ?></tfoot>
+    <tbody><?php echo $this->loadTemplate('body'); ?></tbody>
+  </table>
+  <input type="hidden" name="task" value=""/>
+  <input type="hidden" name="boxchecked" value="0"/>
+  <?php echo JHtml::_('form.token'); ?>
 </form>
 

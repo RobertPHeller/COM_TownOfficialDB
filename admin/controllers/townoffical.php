@@ -8,8 +8,8 @@
  *  Date          : $Date$
  *  Author        : $Author$
  *  Created By    : Robert Heller
- *  Created       : Wed Apr 20 14:26:51 2022
- *  Last Modified : <220420.1626>
+ *  Created       : Wed Apr 20 16:36:20 2022
+ *  Last Modified : <220420.1636>
  *
  *  Description	
  *
@@ -44,55 +44,13 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
-// import Joomla view library
-jimport('joomla.application.component.view');
-
 /**
-  * TownOfficals View
+  * TownOffical Controller
   *
-  * @since  0.0.1
+  * @package     Joomla.Administrator
+  * @subpackage  com_townoffical
+  * @since       0.0.9
   */
-class TownOfficalViewTownOfficals extends JViewLegacy
+class TownOfficalControllerTownOffical extends JControllerForm
 {
-  /**
-    * Display the Town Officals view
-    *
-    * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
-    *
-    * @return  void
-    */
-  function display($tpl = null)
-  {
-    // Get data from the model
-    $this->items= $this->get('Items');
-    $this->pagination= $this->get('Pagination');
-    
-    // Check for errors.
-    if (count($errors = $this->get('Errors')))
-    {
-      JError::raiseError(500, implode('<br />', $errors));
-      
-      return false;
-    }
-    
-    // Set the toolbar
-    $this->addToolBar();
-    
-    // Display the template
-    parent::display($tpl);
-  }
-  /**
-    * Add the page title and toolbar.
-    *
-    * @return  void
-    *
-    * @since   1.6
-    */
-  protected function addToolBar()
-  {
-    JToolbarHelper::title(JText::_('COM_TOWNOFFICAL_MANAGER_TOWNOFFICALS'));
-    JToolbarHelper::addNew('townoffical.add');
-    JToolbarHelper::editList('townoffical.edit');
-    JToolbarHelper::deleteList('', 'townofficals.delete');
-  }
 }

@@ -8,8 +8,8 @@
  *  Date          : $Date$
  *  Author        : $Author$
  *  Created By    : Robert Heller
- *  Created       : Wed Apr 20 14:26:51 2022
- *  Last Modified : <220420.1626>
+ *  Created       : Wed Apr 20 16:40:09 2022
+ *  Last Modified : <220420.1641>
  *
  *  Description	
  *
@@ -41,58 +41,26 @@
  *
  ****************************************************************************/
 
-// No direct access to this file
+// No direct access
 defined('_JEXEC') or die('Restricted access');
 
-// import Joomla view library
-jimport('joomla.application.component.view');
-
-/**
-  * TownOfficals View
-  *
-  * @since  0.0.1
-  */
-class TownOfficalViewTownOfficals extends JViewLegacy
-{
-  /**
-    * Display the Town Officals view
-    *
-    * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
-    *
-    * @return  void
-    */
-  function display($tpl = null)
-  {
-    // Get data from the model
-    $this->items= $this->get('Items');
-    $this->pagination= $this->get('Pagination');
-    
-    // Check for errors.
-    if (count($errors = $this->get('Errors')))
-    {
-      JError::raiseError(500, implode('<br />', $errors));
-      
-      return false;
-    }
-    
-    // Set the toolbar
-    $this->addToolBar();
-    
-    // Display the template
-    parent::display($tpl);
-  }
-  /**
-    * Add the page title and toolbar.
-    *
-    * @return  void
-    *
-    * @since   1.6
-    */
-  protected function addToolBar()
-  {
-    JToolbarHelper::title(JText::_('COM_TOWNOFFICAL_MANAGER_TOWNOFFICALS'));
-    JToolbarHelper::addNew('townoffical.add');
-    JToolbarHelper::editList('townoffical.edit');
-    JToolbarHelper::deleteList('', 'townofficals.delete');
-  }
-}
+?>
+<form action="<?php echo JRoute::_('index.php?option=com_townoffical&layout=edit&id=' . (int) $this->item->id); ?>"
+ method="post" name="adminForm" id="adminForm">
+<div class="form-horizontal">
+  <fieldset class="adminform">
+  <legend><?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_DETAILS'); ?></legend>
+  <div class="row-fluid">
+    <div class="span6">
+      <?php 
+        foreach($this->form->getFieldset() as $field) {
+          echo $field->renderField();        
+        }
+      ?>
+    </div>
+  </div>
+  </fieldset>
+</div>
+<input type="hidden" name="task" value="townoffical.edit" />
+<?php echo JHtml::_('form.token'); ?>
+</form>

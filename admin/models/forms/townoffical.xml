@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    Created By    : Robert Heller
+    Created       : Wed Apr 20 16:44:35 2022
+    Last Modified : <220420.1711>
+
+    Description	
+    
+    Copyright (C) 2022  Robert Heller D/B/A Deepwoods Software
+			51 Locke Hill Road
+			Wendell, MA 01379-9728
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+ 
+-->
+<form>
+  <fieldset>
+    <field
+      name="id"
+      type="hidden"
+    />
+    <field
+      name="office"
+      type="text"
+      label="COM_TOWNOFFICAL_TOWNOFFICAL_OFFICE_LABEL"
+      description="COM_TOWNOFFICAL_TOWNOFFICAL_OFFICE_DESC"
+      size="40"
+      class="inputbox"
+      default=""
+    />
+    <field
+      name="name"
+      type="text"
+      label="COM_TOWNOFFICAL_TOWNOFFICAL_NAME_LABEL"
+      description="COM_TOWNOFFICAL_TOWNOFFICAL_NAME_DESC"
+      size="40"
+      class="inputbox"
+      default=""
+    />
+    <field
+      name="auxoffice"
+      type="text"
+      label="COM_TOWNOFFICAL_TOWNOFFICAL_AUXOFFICE_LABEL"
+      description="COM_TOWNOFFICAL_TOWNOFFICAL_AUXOFFICE_DESC"
+      size="40"
+      class="inputbox"
+      default=""
+    />
+    <field
+      name="termends"
+      type="calendar"
+      label="COM_TOWNOFFICAL_TOWNOFFICAL_TERMENDS_LABEL"
+      description="COM_TOWNOFFICAL_TOWNOFFICAL_TERMENDS_DESC"
+      translateformat="true"
+      showtime="false"
+      class="inputbox"
+      size="10"
+    />
+    <field
+      name="swornindate"
+      type="calendar"
+      label="COM_TOWNOFFICAL_TOWNOFFICAL_SWORNINDATE_LABEL"
+      description="COM_TOWNOFFICAL_TOWNOFFICAL_SWORNINDATE_DESC"
+      translateformat="true"
+      showtime="false"
+      class="inputbox"
+      size="10"
+    />
+    <field
+      name="ethicsexpires"
+      type="calendar"
+      label="COM_TOWNOFFICAL_TOWNOFFICAL_ETHICSEXPIRES_LABEL"
+      description="COM_TOWNOFFICAL_TOWNOFFICAL_ETHICSEXPIRES_DESC"
+      translateformat="true"
+      showtime="false"
+      class="inputbox"
+      size="10"
+    />
+    <field
+      name="iselected"
+      type="checkbox"
+      label="COM_TOWNOFFICAL_TOWNOFFICAL_ISELECTED_LABEL"
+      description="COM_TOWNOFFICAL_TOWNOFFICAL_ISELECTED_DESC"
+      class="inputbox"
+      value="0"
+    />
+    <field
+      name="email"
+      type="email"
+      label="COM_TOWNOFFICAL_TOWNOFFICAL_EMAIL_LABEL"
+      description="COM_TOWNOFFICAL_TOWNOFFICAL_EMAIL_DESC"
+      size="30"
+      class="inputbox"
+      validate="email"
+      default=""
+    />
+    <field
+      name="telephone"
+      type="text"
+      label="COM_TOWNOFFICAL_TOWNOFFICAL_TELEPHONE_LABEL"
+      description="COM_TOWNOFFICAL_TOWNOFFICAL_TELEPHONE_DESC"
+      size="20"
+      class="inputbox"
+      default=""
+    />
+    <field
+      name="notes"
+      type="textarea"
+      label="COM_TOWNOFFICAL_TOWNOFFICAL_NOTES_LABEL"
+      description="COM_TOWNOFFICAL_TOWNOFFICAL_NOTES_DESC"
+      cols="70"
+      rows="20"
+      default=""
+    />
+  </fieldset>
+</form>

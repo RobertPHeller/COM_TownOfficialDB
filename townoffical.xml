@@ -2,7 +2,7 @@
 <!--
     Created By    : Robert Heller
     Created       : Wed Apr 20 12:48:00 2022
-    Last Modified : <220420.1537>
+    Last Modified : <220420.1703>
 
     Description	
     
@@ -36,7 +36,7 @@
   <copyright>(C) Copyright 2022 Robert Heller</copyright>
   <license>GPL 2.0 or later</license>
   <!--  The version string is recorded in the components table -->
-  <version>0.0.8</version>
+  <version>0.0.9</version>
   <!-- The description is optional and defaults to the name -->
   <description>COM_TOWNOFFICAL_DESCRIPTION</description>
   <install> <!-- Runs on install -->
@@ -88,6 +88,7 @@
       <!-- models files section -->
       <folder>models</folder>
       <folder>views</folder>
+      <folder>controllers</folder>
     </files>
     <languages folder="admin/language">
       <language tag="en-GB">en-GB/en-GB.com_townoffical.ini</language>

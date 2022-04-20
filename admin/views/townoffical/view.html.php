@@ -8,8 +8,8 @@
  *  Date          : $Date$
  *  Author        : $Author$
  *  Created By    : Robert Heller
- *  Created       : Wed Apr 20 14:26:51 2022
- *  Last Modified : <220420.1626>
+ *  Created       : Wed Apr 20 16:37:54 2022
+ *  Last Modified : <220420.1639>
  *
  *  Description	
  *
@@ -44,28 +44,32 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
-// import Joomla view library
-jimport('joomla.application.component.view');
-
 /**
-  * TownOfficals View
+  * TownOffical View
   *
   * @since  0.0.1
   */
-class TownOfficalViewTownOfficals extends JViewLegacy
+class TownOfficalViewTownOffical extends JViewLegacy
 {
   /**
-    * Display the Town Officals view
+    * View form
+    *
+    * @var         form
+    */
+  protected $form = null;
+  
+  /**
+    * Display the Hello World view
     *
     * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
     *
     * @return  void
     */
-  function display($tpl = null)
+  public function display($tpl = null)
   {
-    // Get data from the model
-    $this->items= $this->get('Items');
-    $this->pagination= $this->get('Pagination');
+    // Get the Data
+    $this->form = $this->get('Form');
+    $this->item = $this->get('Item');
     
     // Check for errors.
     if (count($errors = $this->get('Errors')))
@@ -75,12 +79,14 @@ class TownOfficalViewTownOfficals extends JViewLegacy
       return false;
     }
     
+    
     // Set the toolbar
     $this->addToolBar();
     
     // Display the template
     parent::display($tpl);
   }
+  
   /**
     * Add the page title and toolbar.
     *
@@ -90,9 +96,27 @@ class TownOfficalViewTownOfficals extends JViewLegacy
     */
   protected function addToolBar()
   {
-    JToolbarHelper::title(JText::_('COM_TOWNOFFICAL_MANAGER_TOWNOFFICALS'));
-    JToolbarHelper::addNew('townoffical.add');
-    JToolbarHelper::editList('townoffical.edit');
-    JToolbarHelper::deleteList('', 'townofficals.delete');
+    $input = JFactory::getApplication()->input;
+    
+    // Hide Joomla Administrator Main menu
+    $input->set('hidemainmenu', true);
+    
+    $isNew = ($this->item->id == 0);
+    
+    if ($isNew)
+    {
+      $title = JText::_('COM_TOWNOFFICAL_MANAGER_TOWNOFFICAL_NEW');
+    }
+    else
+    {
+      $title = JText::_('COM_TOWNOFFICAL_MANAGER_TOWNOFFICAL_EDIT');
+    }
+    
+    JToolbarHelper::title($title, 'townoffical');
+    JToolbarHelper::save('townoffical.save');
+    JToolbarHelper::cancel(
+                           'townoffical.cancel',
+                           $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE'
+                           );
   }
 }
