@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:26:51 2022
- *  Last Modified : <220421.1050>
+ *  Last Modified : <220421.1126>
  *
  *  Description	
  *
@@ -63,6 +63,9 @@ class TownOfficalViewTownOfficals extends JViewLegacy
     */
   function display($tpl = null)
   {
+    // Get application
+    $app = JFactory::getApplication();
+    $context = "townoffical.list.admin.townoffical";
     // Get data from the model
     $this->items= $this->get('Items');
     $this->pagination= $this->get('Pagination');
