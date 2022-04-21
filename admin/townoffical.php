@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:22:34 2022
- *  Last Modified : <220420.1424>
+ *  Last Modified : <220421.1114>
  *
  *  Description	
  *
@@ -46,6 +46,13 @@ defined('_JEXEC') or die('Restricted access');
 
 // import joomla controller library
 jimport('joomla.application.component.controller');
+
+
+// Set some global property
+$document = JFactory::getDocument();
+$document->addStyleDeclaration('.icon-townoffical {background-image: url(../media/com_townoffical/images/offical-16x16.png);}');
+
+
 
 // Get an instance of the controller prefixed by TownOffical
 $controller = JControllerLegacy::getInstance('TownOffical');

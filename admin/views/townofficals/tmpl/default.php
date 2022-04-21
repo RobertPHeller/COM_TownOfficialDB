@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:29:20 2022
- *  Last Modified : <220420.1633>
+ *  Last Modified : <220421.1100>
  *
  *  Description	
  *
@@ -46,8 +46,24 @@ defined('_JEXEC') or die('Restricted Access');
 
 // load tooltip behavior
 JHtml::_('behavior.tooltip');
+
+JHtml::_('formbehavior.chosen', 'select');
+
+$listOrder     = $this->escape($this->filter_order);
+$listDirn      = $this->escape($this->filter_order_Dir);
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_townoffical'); ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_townoffical&view=townofficals'); ?>" method="post" name="adminForm" id="adminForm">
+  <div class="row-fluid">
+    <div class="span6">
+      <?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICALS_FILTER'); ?>
+      <?php
+        echo JLayoutHelper::render(
+                                   'joomla.searchtools.default',
+                                   array('view' => $this)
+                                   );
+      ?>
+    </div>
+  </div>
   <table class="adminlist">
     <thead><?php echo $this->loadTemplate('head'); ?></thead>
     <tfoot><?php echo $this->loadTemplate('foot'); ?></tfoot>
@@ -55,6 +71,8 @@ JHtml::_('behavior.tooltip');
   </table>
   <input type="hidden" name="task" value=""/>
   <input type="hidden" name="boxchecked" value="0"/>
+  <input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
+  <input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
   <?php echo JHtml::_('form.token'); ?>
 </form>
 

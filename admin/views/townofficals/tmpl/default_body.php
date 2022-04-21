@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:35:13 2022
- *  Last Modified : <220420.1546>
+ *  Last Modified : <220421.1059>
  *
  *  Description	
  *
@@ -44,7 +44,10 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
 ?>
-<?php foreach ($this->items as $i => $row): ?>
+<?php if (!empty($this->items)) : ?>
+<?php foreach ($this->items as $i => $row): 
+$link = JRoute::_('index.php?option=com_townoffical&task=townoffical.edit&id=' . $row->id);
+?>
 <tr class="row<?php echo $i % 2; ?>">
   <td>
     <?php echo $this->pagination->getRowOffset($i); ?>
@@ -56,7 +59,9 @@ defined('_JEXEC') or die('Restricted Access');
     <?php echo $row->office; ?>
   </td>
   <td>
+    <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_TOWNOFFICAL_EDIT_TOWNOFFICAL'); ?>">
     <?php echo $row->name; ?>
+    </a>
   </td>
   <td>
     <?php echo $row->auxoffice; ?>

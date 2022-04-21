@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 16:37:54 2022
- *  Last Modified : <220420.1639>
+ *  Last Modified : <220421.1105>
  *
  *  Description	
  *
@@ -85,6 +85,9 @@ class TownOfficalViewTownOffical extends JViewLegacy
     
     // Display the template
     parent::display($tpl);
+    
+    // Set the document
+    $this->setDocument();
   }
   
   /**
@@ -118,5 +121,17 @@ class TownOfficalViewTownOffical extends JViewLegacy
                            'townoffical.cancel',
                            $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE'
                            );
+  }
+  /**
+    * Method to set up the document properties
+    *
+    * @return void
+    */
+  protected function setDocument() 
+  {
+    $isNew = ($this->item->id < 1);
+    $document = JFactory::getDocument();
+    $document->setTitle($isNew ? JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_CREATING') :
+                        JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_EDITING'));
   }
 }

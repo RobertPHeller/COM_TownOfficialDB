@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:26:51 2022
- *  Last Modified : <220420.1626>
+ *  Last Modified : <220421.1050>
  *
  *  Description	
  *
@@ -66,6 +66,11 @@ class TownOfficalViewTownOfficals extends JViewLegacy
     // Get data from the model
     $this->items= $this->get('Items');
     $this->pagination= $this->get('Pagination');
+    $this->state= $this->get('State');
+    $this->filter_order = $app->getUserStateFromRequest($context.'filter_order', 'filter_order', 'office', 'cmd');
+    $this->filter_order_Dir = $app->getUserStateFromRequest($context.'filter_order_Dir', 'filter_order_Dir', 'asc', 'cmd');
+    $this->filter_order_Dir = $app->getUserStateFromRequest($context.'filter_order_Dir', 'filter_order_Dir', 'asc', 'cmd');
+    $this->activeFilters = $this->get('ActiveFilters');
     
     // Check for errors.
     if (count($errors = $this->get('Errors')))
@@ -80,6 +85,9 @@ class TownOfficalViewTownOfficals extends JViewLegacy
     
     // Display the template
     parent::display($tpl);
+    
+    // Set the document
+    $this->setDocument();
   }
   /**
     * Add the page title and toolbar.
@@ -94,5 +102,15 @@ class TownOfficalViewTownOfficals extends JViewLegacy
     JToolbarHelper::addNew('townoffical.add');
     JToolbarHelper::editList('townoffical.edit');
     JToolbarHelper::deleteList('', 'townofficals.delete');
+  }
+  /**
+    * Method to set up the document properties
+    *
+    * @return void
+    */
+  protected function setDocument() 
+  {
+    $document = JFactory::getDocument();
+    $document->setTitle(JText::_('COM_TOWNOFFICAL_ADMINISTRATION'));
   }
 }

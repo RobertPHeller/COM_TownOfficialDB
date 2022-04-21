@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    Created By    : Robert Heller
+    Created       : Thu Apr 21 11:10:34 2022
+    Last Modified : <220421.1112>
+
+    Description	
+    
+    Copyright (C) 2022  Robert Heller D/B/A Deepwoods Software
+			51 Locke Hill Road
+			Wendell, MA 01379-9728
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+ 
+-->
+<form>
+  <fields name="filter">
+    <field
+      name="search"
+      type="text"
+      label="COM_BANNERS_SEARCH_IN_TITLE"
+      hint="JSEARCH_FILTER"
+      class="js-stools-search-string"
+    />
+    <field
+      name="published"
+      type="status"
+      label="JOPTION_SELECT_PUBLISHED"
+      description="JOPTION_SELECT_PUBLISHED_DESC"
+      onchange="this.form.submit();"
+      >
+      <option value="">JOPTION_SELECT_PUBLISHED</option>
+    </field>
+  </fields>
+  <fields name="list">
+    <field
+      name="limit"
+      type="limitbox"
+      class="input-mini"
+      default="25"
+      label="COM_CONTENT_LIST_LIMIT"
+      description="COM_TOWNOFFICAL_LIST_LIMIT_DESC"
+      onchange="this.form.submit();"
+    />
+  </fields>
+</form>
