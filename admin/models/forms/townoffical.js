@@ -8,19 +8,12 @@
      Created By    : Robert Heller, Deepwoods Software
      Created       : Thu Apr 21 13:22:35 2022
 
-     Last Modified : <220421.1358>
+     Last Modified : <220421.1519>
      ID            : $Id$
      Source        : $Source$
      Description	
      Notes
 */
-jQuery(function() {
-    document.formvalidator.setHandler('office',
-        function (value) {
-            regex=/^[^0-9]+$/;
-            return regex.test(value);
-        });
-});
 jQuery(function() {
     document.formvalidator.setHandler('name',
         function (value) {

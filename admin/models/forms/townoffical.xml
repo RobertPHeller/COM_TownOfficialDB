@@ -2,7 +2,7 @@
 <!--
     Created By    : Robert Heller
     Created       : Wed Apr 20 16:44:35 2022
-    Last Modified : <220421.1348>
+    Last Modified : <220421.1711>
 
     Description	
     
@@ -35,15 +35,14 @@
       type="hidden"
     />
     <field
-      name="office"
-      type="text"
+      name="catid"
+      type="category"
       label="COM_TOWNOFFICAL_TOWNOFFICAL_OFFICE_LABEL"
       description="COM_TOWNOFFICAL_TOWNOFFICAL_OFFICE_DESC"
-      size="40"
-      class="inputbox validate-office"
-      validate="office"
+      class="inputbox"
       required="true"
       default=""
+      extension="com_townoffical"
     />
     <field
       name="name"

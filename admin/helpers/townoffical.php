@@ -8,8 +8,8 @@
  *  Date          : $Date$
  *  Author        : $Author$
  *  Created By    : Robert Heller
- *  Created       : Wed Apr 20 14:22:34 2022
- *  Last Modified : <220421.1532>
+ *  Created       : Thu Apr 21 15:28:07 2022
+ *  Last Modified : <220421.1717>
  *
  *  Description	
  *
@@ -44,24 +44,44 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
-// import joomla controller library
-jimport('joomla.application.component.controller');
-
-
-// Set some global property
-$document = JFactory::getDocument();
-$document->addStyleDeclaration('.icon-townoffical {background-image: url(../media/com_townoffical/images/offical-16x16.png);}');
-
-
-// Require helper file
-JLoader::register('TownOfficalHelper', JPATH_COMPONENT . '/helpers/townoffical.php');
-
-// Get an instance of the controller prefixed by TownOffical
-$controller = JControllerLegacy::getInstance('TownOffical');
-
-// Perform the Request task
-$controller->execute(JFactory::getApplication()->input->get('task'));
-
-// Redirect if set by the controller
-$controller->redirect();
-
+/**
+  * TownOffical component helper.
+  *
+  * @param   string  $submenu  The name of the active view.
+  *
+  * @return  void
+  *
+  * @since   1.6
+  */
+abstract class TownOfficalHelper extends JHelperContent
+{
+  /**
+    * Configure the Linkbar.
+    *
+    * @return Bool
+    */
+  
+  public static function addSubmenu($submenu) 
+  {
+    JHtmlSidebar::addEntry(
+                           JText::_('COM_TOWNOFFICAL_SUBMENU_OFFICIALS'),
+                           'index.php?option=com_townoffical',
+                           $submenu == 'townofficals'
+                           );
+    
+    JHtmlSidebar::addEntry(
+                           JText::_('COM_TOWNOFFICAL_SUBMENU_OFFICES'),
+                           'index.php?option=com_categories&view=categories&extension=com_townoffical',
+                           $submenu == 'categories'
+                           );
+    
+    // Set some global property
+    $document = JFactory::getDocument();
+    $document->addStyleDeclaration('.icon-48-townoffical ' .
+                                   '{background-image: url(../media/com_townoffical/images/offical-48x48.png);}');
+    if ($submenu == 'categories') 
+    {
+      $document->setTitle(JText::_('COM_TOWNOFFICAL_ADMINISTRATION_OFFICES'));
+    }
+  }
+}

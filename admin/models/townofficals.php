@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:43:11 2022
- *  Last Modified : <220421.1109>
+ *  Last Modified : <220421.1720>
  *
  *  Description	
  *
@@ -84,7 +84,14 @@ class TownOfficalModelTownOfficals extends JModelList
     $query = $db->getQuery(true);
     
     // Create the base select statement.
-    $query->select('*')->from($db->quoteName('#__townoffical'));
+    $query->select( 'a.id as id, a.name as name, a.auxoffice as auxoffice,'
+                   .'a.termends as termends, a.iselected as iselected,'
+                   .'a.published as published')->from($db->quoteName('#__townoffical'));
+    
+    // Join over the categories (offices).
+    $query->select($db->quoteName('c.title', 'office'))
+           ->join('LEFT', $db->quoteName('#__categories', 'c') . 
+                  ' ON c.id = a.catid');
     
     // Filter: like / search
     $search = $this->getState('filter.search');
@@ -100,11 +107,11 @@ class TownOfficalModelTownOfficals extends JModelList
     
     if (is_numeric($published))
     {
-      $query->where('published = ' . (int) $published);
+      $query->where('a.published = ' . (int) $published);
     }
     elseif ($published === '')
     {
-      $query->where('(published IN (0, 1))');
+      $query->where('(a.published IN (0, 1))');
     }
     
     // Add the list ordering clause.
