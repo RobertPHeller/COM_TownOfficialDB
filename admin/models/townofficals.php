@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:43:11 2022
- *  Last Modified : <220421.1720>
+ *  Last Modified : <220421.1749>
  *
  *  Description	
  *
@@ -86,7 +86,8 @@ class TownOfficalModelTownOfficals extends JModelList
     // Create the base select statement.
     $query->select( 'a.id as id, a.name as name, a.auxoffice as auxoffice,'
                    .'a.termends as termends, a.iselected as iselected,'
-                   .'a.published as published')->from($db->quoteName('#__townoffical'));
+                   .'a.published as published')
+          ->from($db->quoteName('#__townoffical', 'a'));
     
     // Join over the categories (offices).
     $query->select($db->quoteName('c.title', 'office'))
