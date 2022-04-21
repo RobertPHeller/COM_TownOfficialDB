@@ -2,7 +2,7 @@
 <!--
     Created By    : Robert Heller
     Created       : Wed Apr 20 16:44:35 2022
-    Last Modified : <220421.1322>
+    Last Modified : <220421.1348>
 
     Description	
     
@@ -41,6 +41,8 @@
       description="COM_TOWNOFFICAL_TOWNOFFICAL_OFFICE_DESC"
       size="40"
       class="inputbox validate-office"
+      validate="office"
+      required="true"
       default=""
     />
     <field
@@ -51,6 +53,8 @@
       size="40"
       class="inputbox validate-name"
       default=""
+      validate="name"
+      required="true"
     />
     <field
       name="auxoffice"
@@ -60,6 +64,7 @@
       size="40"
       class="inputbox validate-auxoffice"
       default=""
+      validate="auxoffice"
     />
     <field
       name="termends"
@@ -69,6 +74,7 @@
       translateformat="true"
       showtime="false"
       class="inputbox"
+      required="true"
       size="10"
     />
     <field
@@ -117,6 +123,7 @@
       size="20"
       class="inputbox validate-telephone"
       default=""
+      validate="telephone"
     />
     <field
       name="notes"
