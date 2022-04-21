@@ -8,8 +8,8 @@
  *  Date          : $Date$
  *  Author        : $Author$
  *  Created By    : Robert Heller
- *  Created       : Wed Apr 20 16:40:09 2022
- *  Last Modified : <220421.1316>
+ *  Created       : Thu Apr 21 13:36:42 2022
+ *  Last Modified : <220421.1336>
  *
  *  Description	
  *
@@ -41,26 +41,22 @@
  *
  ****************************************************************************/
 
-// No direct access
+
+// No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
-?>
-<form action="<?php echo JRoute::_('index.php?option=com_townoffical&layout=edit&id=' . (int) $this->item->id); ?>"
- method="post" name="adminForm" id="adminForm" class="form-validate">
-<div class="form-horizontal">
-  <fieldset class="adminform">
-  <legend><?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_DETAILS'); ?></legend>
-  <div class="row-fluid">
-    <div class="span6">
-      <?php 
-        foreach($this->form->getFieldset() as $field) {
-          echo $field->renderField();        
-        }
-      ?>
-    </div>
-  </div>
-  </fieldset>
-</div>
-<input type="hidden" name="task" value="townoffical.edit" />
-<?php echo JHtml::_('form.token'); ?>
-</form>
+/**
+  * Form Rule class for the Joomla Framework.
+  */
+class JFormRuleAuxoffice extends JFormRule
+{
+  /**
+    * The regular expression.
+    *
+    * @accessprotected
+    * @varstring
+    * @since2.5
+    */
+  protected $regex = '^[^0-9]+$';
+}
+

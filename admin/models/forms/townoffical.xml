@@ -2,7 +2,7 @@
 <!--
     Created By    : Robert Heller
     Created       : Wed Apr 20 16:44:35 2022
-    Last Modified : <220420.1711>
+    Last Modified : <220421.1322>
 
     Description	
     
@@ -26,7 +26,9 @@
 
  
 -->
-<form>
+<form
+  addrulepath="/administrator/components/com_townoffical/models/rules"
+  >
   <fieldset>
     <field
       name="id"
@@ -38,7 +40,7 @@
       label="COM_TOWNOFFICAL_TOWNOFFICAL_OFFICE_LABEL"
       description="COM_TOWNOFFICAL_TOWNOFFICAL_OFFICE_DESC"
       size="40"
-      class="inputbox"
+      class="inputbox validate-office"
       default=""
     />
     <field
@@ -47,7 +49,7 @@
       label="COM_TOWNOFFICAL_TOWNOFFICAL_NAME_LABEL"
       description="COM_TOWNOFFICAL_TOWNOFFICAL_NAME_DESC"
       size="40"
-      class="inputbox"
+      class="inputbox validate-name"
       default=""
     />
     <field
@@ -56,7 +58,7 @@
       label="COM_TOWNOFFICAL_TOWNOFFICAL_AUXOFFICE_LABEL"
       description="COM_TOWNOFFICAL_TOWNOFFICAL_AUXOFFICE_DESC"
       size="40"
-      class="inputbox"
+      class="inputbox validate-auxoffice"
       default=""
     />
     <field
@@ -113,7 +115,7 @@
       label="COM_TOWNOFFICAL_TOWNOFFICAL_TELEPHONE_LABEL"
       description="COM_TOWNOFFICAL_TOWNOFFICAL_TELEPHONE_DESC"
       size="20"
-      class="inputbox"
+      class="inputbox validate-telephone"
       default=""
     />
     <field

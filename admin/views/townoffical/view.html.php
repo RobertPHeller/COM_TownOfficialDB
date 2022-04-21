@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 16:37:54 2022
- *  Last Modified : <220421.1105>
+ *  Last Modified : <220421.1332>
  *
  *  Description	
  *
@@ -70,6 +70,7 @@ class TownOfficalViewTownOffical extends JViewLegacy
     // Get the Data
     $this->form = $this->get('Form');
     $this->item = $this->get('Item');
+    $this->script = $this->get('Script');
     
     // Check for errors.
     if (count($errors = $this->get('Errors')))
@@ -133,5 +134,9 @@ class TownOfficalViewTownOffical extends JViewLegacy
     $document = JFactory::getDocument();
     $document->setTitle($isNew ? JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_CREATING') :
                         JText::_('COM_TOWNOFFICAL_TOWNOFFICAL_EDITING'));
+    $document->addScript(JURI::root() . $this->script);
+    $document->addScript(JURI::root() . "/administrator/components/com_townoffical"
+                         . "/views/townoffical/submitbutton.js");
+    JText::script('COM_TOWNOFFICAL_TOWNOFFICAL_ERROR_UNACCEPTABLE');
   }
 }

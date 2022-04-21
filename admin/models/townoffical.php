@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 16:41:56 2022
- *  Last Modified : <220420.1643>
+ *  Last Modified : <220421.1334>
  *
  *  Description	
  *
@@ -97,6 +97,15 @@ class TownOfficalModelTownOffical extends JModelAdmin
     return $form;
   }
   
+  /**
+    * Method to get the script that have to be included on the form
+    *
+    * @return stringScript files
+    */
+  public function getScript() 
+  {
+    return 'administrator/components/com_townoffical/models/forms/townoffical.js';
+  }
   /**
     * Method to get the data that should be injected in the form.
     *
