@@ -2,7 +2,7 @@
 <!--
     Created By    : Robert Heller
     Created       : Wed Apr 20 12:48:00 2022
-    Last Modified : <220421.1120>
+    Last Modified : <220421.1148>
 
     Description	
     
@@ -91,7 +91,9 @@
       <folder>tables</folder>
       <!-- models files section -->
       <folder>models</folder>
+      <!-- views files section -->
       <folder>views</folder>
+      <!-- controllers files section -->
       <folder>controllers</folder>
     </files>
     <languages folder="admin/language">

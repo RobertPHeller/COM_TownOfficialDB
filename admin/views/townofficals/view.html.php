@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:26:51 2022
- *  Last Modified : <220421.1126>
+ *  Last Modified : <220421.1200>
  *
  *  Description	
  *
@@ -70,6 +70,7 @@ class TownOfficalViewTownOfficals extends JViewLegacy
     $this->items= $this->get('Items');
     $this->pagination= $this->get('Pagination');
     $this->state= $this->get('State');
+    $this->filterForm    = $this->get('FilterForm');
     $this->filter_order = $app->getUserStateFromRequest($context.'filter_order', 'filter_order', 'office', 'cmd');
     $this->filter_order_Dir = $app->getUserStateFromRequest($context.'filter_order_Dir', 'filter_order_Dir', 'asc', 'cmd');
     $this->filter_order_Dir = $app->getUserStateFromRequest($context.'filter_order_Dir', 'filter_order_Dir', 'asc', 'cmd');

@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:35:13 2022
- *  Last Modified : <220421.1059>
+ *  Last Modified : <220421.1215>
  *
  *  Description	
  *
@@ -80,3 +80,4 @@ $link = JRoute::_('index.php?option=com_townoffical&task=townoffical.edit&id=' .
   </td>
 </tr>
 <?php endforeach; ?>
+<?php endif; ?>
