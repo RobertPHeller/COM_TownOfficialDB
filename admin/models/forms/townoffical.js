@@ -8,7 +8,7 @@
      Created By    : Robert Heller, Deepwoods Software
      Created       : Thu Apr 21 13:22:35 2022
 
-     Last Modified : <220421.1328>
+     Last Modified : <220421.1358>
      ID            : $Id$
      Source        : $Source$
      Description	
@@ -31,14 +31,14 @@ jQuery(function() {
 jQuery(function() {
     document.formvalidator.setHandler('auxoffice',
         function (value) {
-            regex=/^[^0-9]+$/;
+            regex=/^[^0-9]*$/;
             return regex.test(value);
         });
 });
 jQuery(function() {
     document.formvalidator.setHandler('telephone',
         function (value) {
-            regex=/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
+            regex=/^([0-9]{3}-[0-9]{3}-[0-9]{4})|$/;
             return regex.test(value);
         });
 });

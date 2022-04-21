@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Thu Apr 21 13:36:42 2022
- *  Last Modified : <220421.1336>
+ *  Last Modified : <220421.1354>
  *
  *  Description	
  *
@@ -57,6 +57,6 @@ class JFormRuleAuxoffice extends JFormRule
     * @varstring
     * @since2.5
     */
-  protected $regex = '^[^0-9]+$';
+  protected $regex = '^[^0-9]*$';
 }
 

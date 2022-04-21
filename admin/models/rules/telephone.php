@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Thu Apr 21 13:37:03 2022
- *  Last Modified : <220421.1337>
+ *  Last Modified : <220421.1358>
  *
  *  Description	
  *
@@ -57,6 +57,6 @@ class JFormRuleTelephone extends JFormRule
     * @varstring
     * @since2.5
     */
-  protected $regex = '^[0-9]{3}-[0-9]{3}-[0-9]{4}$';
+  protected $regex = '^([0-9]{3}-[0-9]{3}-[0-9]{4})|$';
 }
 
