@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:35:13 2022
- *  Last Modified : <220421.1215>
+ *  Last Modified : <220422.1226>
  *
  *  Description	
  *
@@ -73,7 +73,7 @@ $link = JRoute::_('index.php?option=com_townoffical&task=townoffical.edit&id=' .
     <?php echo $row->iselected; ?>
   </td>
   <td align="center">
-    <?php echo JHtml::_('jgrid.published', $row->published, $i, 'townofficials.', true, 'cb'); ?>
+    <?php echo JHtml::_('jgrid.published', $row->published, $i, 'townofficals.', true, 'cb'); ?>
   </td>
   <td align="center">
     <?php echo $row->id; ?>

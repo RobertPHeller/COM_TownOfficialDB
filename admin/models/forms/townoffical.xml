@@ -2,7 +2,7 @@
 <!--
     Created By    : Robert Heller
     Created       : Wed Apr 20 16:44:35 2022
-    Last Modified : <220421.1711>
+    Last Modified : <220422.1159>
 
     Description	
     
@@ -37,13 +37,15 @@
     <field
       name="catid"
       type="category"
+      extension="com_townoffical"
+      default=""
+      class="inputbox"
       label="COM_TOWNOFFICAL_TOWNOFFICAL_OFFICE_LABEL"
       description="COM_TOWNOFFICAL_TOWNOFFICAL_OFFICE_DESC"
-      class="inputbox"
       required="true"
-      default=""
-      extension="com_townoffical"
-    />
+      >
+      <option value="0">JOPTION_SELECT_CATEGORY</option>
+    </field>
     <field
       name="name"
       type="text"

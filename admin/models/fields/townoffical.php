@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 13:57:55 2022
- *  Last Modified : <220421.1525>
+ *  Last Modified : <220422.1136>
  *
  *  Description	
  *
@@ -71,7 +71,7 @@ class JFormFieldTownOffical extends JFormFieldList
   {
     $db    = JFactory::getDBO();
     $query = $db->getQuery(true);
-    $query->select('id,#__categories.title as office,catid,name');
+    $query->select('#__townoffical.id as id,name,#__categories.title as office,catid');
     $query->from('#__townoffical');
     $query->leftJoin('#__categories on catid=#__categories.id');
     // Retrieve only published items
@@ -85,7 +85,7 @@ class JFormFieldTownOffical extends JFormFieldList
       foreach ($messages as $message)
       {
         $options[] = JHtml::_('select.option', $message->id, 
-                              ($message->catid ? $message->office . ' ': '') 
+                              ($message->catid ? $message->office . ' ': '')
                               . $message->name);
       }
     }

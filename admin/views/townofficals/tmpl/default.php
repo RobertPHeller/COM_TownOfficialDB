@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:29:20 2022
- *  Last Modified : <220421.1100>
+ *  Last Modified : <220422.1210>
  *
  *  Description	
  *
@@ -53,26 +53,31 @@ $listOrder     = $this->escape($this->filter_order);
 $listDirn      = $this->escape($this->filter_order_Dir);
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_townoffical&view=townofficals'); ?>" method="post" name="adminForm" id="adminForm">
-  <div class="row-fluid">
-    <div class="span6">
-      <?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICALS_FILTER'); ?>
-      <?php
-        echo JLayoutHelper::render(
-                                   'joomla.searchtools.default',
-                                   array('view' => $this)
-                                   );
-      ?>
-    </div>
+  <div id="j-sidebar-container" class="span2">
+    <?php echo JHtmlSidebar::render(); ?>
   </div>
-  <table class="adminlist">
-    <thead><?php echo $this->loadTemplate('head'); ?></thead>
-    <tfoot><?php echo $this->loadTemplate('foot'); ?></tfoot>
-    <tbody><?php echo $this->loadTemplate('body'); ?></tbody>
-  </table>
-  <input type="hidden" name="task" value=""/>
-  <input type="hidden" name="boxchecked" value="0"/>
-  <input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
-  <input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
-  <?php echo JHtml::_('form.token'); ?>
+  <div id="j-main-container" class="span10">
+    <div class="row-fluid">
+      <div class="span6">
+        <?php echo JText::_('COM_TOWNOFFICAL_TOWNOFFICALS_FILTER'); ?>
+        <?php
+          echo JLayoutHelper::render(
+                                     'joomla.searchtools.default',
+                                     array('view' => $this)
+                                     );
+        ?>
+      </div>
+    </div>
+    <table class="adminlist">
+      <thead><?php echo $this->loadTemplate('head'); ?></thead>
+      <tfoot><?php echo $this->loadTemplate('foot'); ?></tfoot>
+      <tbody><?php echo $this->loadTemplate('body'); ?></tbody>
+    </table>
+    <input type="hidden" name="task" value=""/>
+    <input type="hidden" name="boxchecked" value="0"/>
+    <input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
+    <input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
+    <?php echo JHtml::_('form.token'); ?>
+  </div>
 </form>
 
