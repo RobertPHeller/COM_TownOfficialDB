@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 13:25:12 2022
- *  Last Modified : <220420.1325>
+ *  Last Modified : <220422.1316>
  *
  *  Description	
  *
@@ -44,5 +44,8 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 ?>
-<h1><?php echo $this->msg; ?></h1>
+<h1><?php echo (($this->item->office and 
+                 $this->item->params->get('show_office'))
+                ? ($this->item->office.' ') : '').
+               $this->item->name; ?></h1>
 

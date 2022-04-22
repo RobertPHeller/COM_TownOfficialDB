@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 13:21:57 2022
- *  Last Modified : <220420.1337>
+ *  Last Modified : <220422.1323>
  *
  *  Description	
  *
@@ -64,7 +64,7 @@ class TownOfficalViewTownOffical extends JViewLegacy
   function display($tpl = null)
   {
     // Assign data to the view
-    $this->msg = $this->get('Msg');
+    $this->item = $this->get('Item');
     
     // Check for errors.
     if (count($errors = $this->get('Errors')))

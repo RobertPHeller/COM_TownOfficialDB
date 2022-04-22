@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:09:16 2022
- *  Last Modified : <220420.1410>
+ *  Last Modified : <220422.1255>
  *
  *  Description	
  *
@@ -59,5 +59,24 @@ class TownOfficalTableTownOffical extends JTable
   function __construct(&$db)
   {
     parent::__construct('#__townoffical', 'id', $db);
+  }
+  /**
+    * Overloaded bind function
+    *
+    * @param       array           named array
+    * @return      null|string     null is operation was satisfactory, otherwise returns an error
+    * @see JTable:bind
+    * @since 1.5
+    */
+  public function bind($array, $ignore = '')
+  {
+    if (isset($array['params']) && is_array($array['params']))
+    {
+      // Convert the params field to a string.
+      $parameter = new JRegistry;
+      $parameter->loadArray($array['params']);
+      $array['params'] = (string)$parameter;
+    }
+    return parent::bind($array, $ignore);
   }
 }

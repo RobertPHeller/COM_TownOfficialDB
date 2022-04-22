@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 13:34:35 2022
- *  Last Modified : <220420.1407>
+ *  Last Modified : <220422.1311>
  *
  *  Description	
  *
@@ -55,9 +55,9 @@ jimport('joomla.application.component.modelitem');
 class TownOfficalModelTownOffical extends JModelItem
 {
   /**
-    * @var array messages
+    * @var object item
     */
-  protected $messages;
+  protected $item;
   
   /**
     * Method to get a table object, load it if necessary.
@@ -76,32 +76,74 @@ class TownOfficalModelTownOffical extends JModelItem
   }
   
   /**
-    * Get the message
+    * Method to auto-populate the model state.
     *
-    * @return  string  The message to be displayed to the user
+    * This method should only be called once per instantiation and is designed
+    * to be called on the first call to the getState() method unless the model
+    * configuration flag to ignore the request is set.
+    *
+    * Note. Calling getState in this method will result in recursion.
+    *
+    * @returnvoid
+    * @since2.5
     */
-  public function getMsg($id = 1)
+  protected function populateState()
   {
-    if (!is_array($this->messages))
-    {
-      $this->messages = array();
-    }
+    // Get the message id
+    $jinput = JFactory::getApplication()->input;
+    $id     = $jinput->get('id', 1, 'INT');
+    $this->setState('message.id', $id);
     
-    if (!isset($this->messages[$id]))
+    // Load the parameters.
+    $this->setState('params', JFactory::getApplication()->getParams());
+    parent::populateState();
+  }
+  /**
+    * Method to get a table object, load it if necessary.
+    *
+    * @param   string  $type    The table name. Optional.
+    * @param   string  $prefix  The class prefix. Optional.
+    * @param   array   $config  Configuration array for model. Optional.
+    *
+    * @return  JTable  A JTable object
+    *
+    * @since   1.6
+    */
+  public function getTable($type = 'HelloWorld', $prefix = 'HelloWorldTable', $config = array())
+  {
+    return JTable::getInstance($type, $prefix, $config);
+  }
+  
+  /**
+    * Get the message
+    * @return object The message to be displayed to the user
+    */
+  public function getItem()
+  {
+    if (!isset($this->item)) 
     {
-      $jinput = JFactory::getApplication()->input;
-      $id     = $jinput->get('id', 1, 'INT');
+      $id    = $this->getState('message.id');
+      $db    = JFactory::getDbo();
+      $query = $db->getQuery(true);
+      $query->select('o.name, o.params, c.title as office')
+      ->from('#__townoffical as o')
+      ->leftJoin('#__categories as c ON o.catid=c.id')
+      ->where('o.id=' . (int)$id);
+      $db->setQuery((string)$query);
       
-      // Get a TableTownOffical instance
-      $table = $this->getTable();
-    
-      // Load the message
-      $table->load($id);
-    
-      // Assign the message
-      $this->messages[$id] = $table->office . ' ' . $table->name;
+      if ($this->item = $db->loadObject()) 
+      {
+        // Load the JSON string
+        $params = new JRegistry;
+        $params->loadString($this->item->params, 'JSON');
+        $this->item->params = $params;
+        
+        // Merge global params with item params
+        $params = clone $this->getState('params');
+        $params->merge($this->item->params);
+        $this->item->params = $params;
+      }
     }
-    
-    return $this->messages[$id];
+    return $this->item;
   }
 }

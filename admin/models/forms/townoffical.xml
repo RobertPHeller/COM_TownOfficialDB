@@ -2,7 +2,7 @@
 <!--
     Created By    : Robert Heller
     Created       : Wed Apr 20 16:44:35 2022
-    Last Modified : <220422.1159>
+    Last Modified : <220422.1305>
 
     Description	
     
@@ -29,7 +29,10 @@
 <form
   addrulepath="/administrator/components/com_townoffical/models/rules"
   >
-  <fieldset>
+  <fieldset
+    name="details"
+    label="COM_TOWNOFFICAL_TOWNOFFICAL_DETAILS"
+    >
     <field
       name="id"
       type="hidden"
@@ -136,4 +139,22 @@
       default=""
     />
   </fieldset>
+  <fields name="params">
+    <fieldset
+      name="params"
+      label="JGLOBAL_FIELDSET_DISPLAY_OPTIONS"
+      >
+      <field
+        name="show_category"
+        type="list"
+        label="COM_TOWNOFFICAL_TOWNOFFICAL_FIELD_SHOW_OFFICE_LABEL"
+        description="COM_TOWNOFFICAL_TOWNOFFICAL_FIELD_SHOW_OFFICE_DESC"
+        default=""
+        >
+        <option value="">JGLOBAL_USE_GLOBAL</option>
+        <option value="0">JHIDE</option>
+        <option value="1">JSHOW</option>
+      </field>
+    </fieldset>
+  </fields>
 </form>

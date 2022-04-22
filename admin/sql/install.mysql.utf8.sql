@@ -13,6 +13,7 @@ CREATE TABLE `#__townoffical` (
     `notes`     TEXT,
     `published` tinyint(4) NOT NULL DEFAULT '0',
     `catid` int(11) NOT NULL DEFAULT '0',
+    `params`   VARCHAR(1024) NOT NULL DEFAULT '',
     PRIMARY KEY (`id`)
 )
     ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
