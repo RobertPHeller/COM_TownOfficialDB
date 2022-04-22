@@ -2,7 +2,7 @@
 <!--
     Created By    : Robert Heller
     Created       : Thu Apr 21 15:47:52 2022
-    Last Modified : <220421.1548>
+    Last Modified : <220422.1610>
 
     Description	
     
@@ -33,8 +33,17 @@
     <action name="core.create" title="JACTION_CREATE" description="JACTION_CREATE_COMPONENT_DESC" />
     <action name="core.delete" title="JACTION_DELETE" description="JACTION_DELETE_COMPONENT_DESC" />
     <action name="core.edit" title="JACTION_EDIT" description="JACTION_EDIT_COMPONENT_DESC" />
+    <action name="core.edit.state" title="JACTION_EDITSTATE" description="JACTION_EDITSTATE_COMPONENT_DESC" />
+    <action name="core.edit.own" title="JACTION_EDITOWN" description="JACTION_EDITOWN_COMPONENT_DESC" />
   </section>
-  <section name="message">
+  <section name="office">
+    <action name="core.create" title="JACTION_CREATE" description="COM_CATEGORIES_ACCESS_CREATE_DESC" />
+    <action name="core.delete" title="JACTION_DELETE" description="COM_CATEGORIES_ACCESS_DELETE_DESC" />
+    <action name="core.edit" title="JACTION_EDIT" description="COM_CATEGORIES_ACCESS_EDIT_DESC" />
+    <action name="core.edit.state" title="JACTION_EDITSTATE" description="COM_CATEGORIES_ACCESS_EDITSTATE_DESC" />
+    <action name="core.edit.own" title="JACTION_EDITOWN" description="COM_CATEGORIES_ACCESS_EDITOWN_DESC" />
+  </section>
+  <section name="offical">
     <action name="core.delete" title="JACTION_DELETE" description="COM_TOWNOFFICAL_ACCESS_DELETE_DESC" />
     <action name="core.edit" title="JACTION_EDIT" description="COM_TOWNOFFICAL_ACCESS_EDIT_DESC" />
   </section>

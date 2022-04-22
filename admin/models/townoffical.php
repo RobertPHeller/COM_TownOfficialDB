@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 16:41:56 2022
- *  Last Modified : <220421.1334>
+ *  Last Modified : <220422.1632>
  *
  *  Description	
  *
@@ -127,5 +127,15 @@ class TownOfficalModelTownOffical extends JModelAdmin
     }
     
     return $data;
+  }
+  /**
+    * Method to check if it's OK to delete a message. Overrides JModelAdmin::canDelete
+    */
+  protected function canDelete($record)
+  {
+    if( !empty( $record->id ) )
+    {
+      return JFactory::getUser()->authorise( "core.delete", "com_townoffical.townoffical." . $record->id );
+    }
   }
 }

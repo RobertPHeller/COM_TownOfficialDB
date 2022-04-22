@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS `#__townoffical`;
 
 CREATE TABLE `#__townoffical` (
     `id`       INT(11)     NOT NULL AUTO_INCREMENT,
+    `asset_id` INT(10)     NOT NULL DEFAULT '0',
     `auxoffice` VARCHAR(25),
     `name`     VARCHAR(50) NOT NULL,
     `termends` DATE NOT NULL DEFAULT '1969-01-01',

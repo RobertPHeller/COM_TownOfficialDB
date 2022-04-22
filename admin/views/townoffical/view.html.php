@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 16:37:54 2022
- *  Last Modified : <220421.1332>
+ *  Last Modified : <220422.1707>
  *
  *  Description	
  *
@@ -57,6 +57,9 @@ class TownOfficalViewTownOffical extends JViewLegacy
     * @var         form
     */
   protected $form = null;
+  protected $item;
+  protected $script;
+  protected $canDo;
   
   /**
     * Display the Hello World view
@@ -71,6 +74,9 @@ class TownOfficalViewTownOffical extends JViewLegacy
     $this->form = $this->get('Form');
     $this->item = $this->get('Item');
     $this->script = $this->get('Script');
+    
+    // What Access Permissions does this user have? What can (s)he do?
+    $this->canDo = JHelperContent::getActions('com_townoffical', 'townoffical', $this->item->id);
     
     // Check for errors.
     if (count($errors = $this->get('Errors')))
@@ -107,21 +113,46 @@ class TownOfficalViewTownOffical extends JViewLegacy
     
     $isNew = ($this->item->id == 0);
     
+    JToolBarHelper::title($isNew ? JText::_('COM_TOWNOFFICAL_MANAGER_TOWNOFFICAL_NEW')
+                                 :  JText::_('COM_TOWNOFFICAL_MANAGER_TOWNOFFICAL_EDIT'))
+    
+    // Build the actions for new and existing records.
     if ($isNew)
     {
-      $title = JText::_('COM_TOWNOFFICAL_MANAGER_TOWNOFFICAL_NEW');
+      // For new records, check the create permission.
+      if ($this->canDo->get('core.create'))
+      {
+        JToolBarHelper::apply('townoffical.apply', 'JTOOLBAR_APPLY');
+        JToolbarHelper::save('townoffical.save', 'JTOOLBAR_SAVE');
+        JToolBarHelper::custom('townoffical.save2new', 'save-new.png', 
+                               'save-new_f2.png',
+                               'JTOOLBAR_SAVE_AND_NEW', false);
+      }                               
+      JToolbarHelper::cancel('townoffical.cancel','JTOOLBAR_CANCEL');
     }
     else
     {
-      $title = JText::_('COM_TOWNOFFICAL_MANAGER_TOWNOFFICAL_EDIT');
+      if ($this->canDo->get('core.edit'))
+      {
+        JToolBarHelper::apply('townoffical.apply', 'JTOOLBAR_APPLY');
+        JToolbarHelper::save('townoffical.save', 'JTOOLBAR_SAVE');
+        
+        // We can save this record, but check the create permission to see
+        // if we can return to make a new one.
+        if ($this->canDo->get('core.create'))
+        {
+          JToolBarHelper::custom('townoffical.save2new', 'save-new.png', 
+                               'save-new_f2.png',
+                               'JTOOLBAR_SAVE_AND_NEW', false);
+        }
+      }
+      if ($this->canDo->get('core.create')) 
+      {
+        JToolBarHelper::custom('townoffical.save2copy', 'save-copy.png', 'save-copy_f2.png',
+                               'JTOOLBAR_SAVE_AS_COPY', false);
+      }
+      JToolBarHelper::cancel('townoffical.cancel', 'JTOOLBAR_CLOSE');
     }
-    
-    JToolbarHelper::title($title, 'townoffical');
-    JToolbarHelper::save('townoffical.save');
-    JToolbarHelper::cancel(
-                           'townoffical.cancel',
-                           $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE'
-                           );
   }
   /**
     * Method to set up the document properties

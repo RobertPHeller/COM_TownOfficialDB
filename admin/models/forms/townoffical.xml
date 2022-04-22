@@ -2,7 +2,7 @@
 <!--
     Created By    : Robert Heller
     Created       : Wed Apr 20 16:44:35 2022
-    Last Modified : <220422.1305>
+    Last Modified : <220422.1638>
 
     Description	
     
@@ -157,4 +157,24 @@
       </field>
     </fieldset>
   </fields>
+  <fieldset
+    name="accesscontrol"
+    label="COM_TOWNOFFICAL_FIELDSET_RULES"
+    >
+    <field
+      name="asset_id"
+      type="hidden"
+      filter="unset"
+    />
+    <field
+      name="rules"
+      type="rules"
+      label="COM_TOWNOFFICAL_FIELD_RULES_LABEL"
+      filter="rules"
+      validate="rules"
+      class="inputbox"
+      component="com_townoffical"
+      section="message"
+    />
+  </fieldset>
 </form>

@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:22:34 2022
- *  Last Modified : <220421.1532>
+ *  Last Modified : <220422.1629>
  *
  *  Description	
  *
@@ -52,6 +52,12 @@ jimport('joomla.application.component.controller');
 $document = JFactory::getDocument();
 $document->addStyleDeclaration('.icon-townoffical {background-image: url(../media/com_townoffical/images/offical-16x16.png);}');
 
+
+// Access check: is this user allowed to access the backend of this component?
+if (!JFactory::getUser()->authorise('core.manage', 'com_townoffical')) 
+{
+  throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'));
+}
 
 // Require helper file
 JLoader::register('TownOfficalHelper', JPATH_COMPONENT . '/helpers/townoffical.php');

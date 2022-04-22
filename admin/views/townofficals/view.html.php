@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:26:51 2022
- *  Last Modified : <220422.1323>
+ *  Last Modified : <220422.1713>
  *
  *  Description	
  *
@@ -76,6 +76,9 @@ class TownOfficalViewTownOfficals extends JViewLegacy
     $this->filterForm    = $this->get('FilterForm');
     $this->activeFilters = $this->get('ActiveFilters');
     
+    // What Access Permissions does this user have? What can (s)he do?
+    $this->canDo = JHelperContent::getActions('com_townoffical');
+    
     // Check for errors.
     if (count($errors = $this->get('Errors')))
     {
@@ -105,11 +108,32 @@ class TownOfficalViewTownOfficals extends JViewLegacy
     */
   protected function addToolBar()
   {
-    JToolbarHelper::title(JText::_('COM_TOWNOFFICAL_MANAGER_TOWNOFFICALS'));
-    JToolbarHelper::addNew('townoffical.add');
-    JToolbarHelper::editList('townoffical.edit');
-    JToolbarHelper::deleteList('', 'townofficals.delete');
-    JToolBarHelper::preferences('com_townoffical');
+    $title = JText::_('COM_TOWNOFFICAL_MANAGER_TOWNOFFICALS');
+    
+    if ($this->pagination->total)
+    {
+      $title .= "<span style='font-size: 0.5em; vertical-align: middle;'>(" . $this->pagination->total . ")</span>";
+    }
+    
+    JToolBarHelper::title($title, 'townoffical');
+    
+    if ($this->canDo->get('core.create'))
+    {
+      JToolbarHelper::addNew('townoffical.add', 'JTOOLBAR_NEW');
+    }
+    if ($this->canDo->get('core.edit')) 
+    {
+      JToolbarHelper::editList('townoffical.edit', 'JTOOLBAR_EDIT');
+    }
+    if ($this->canDo->get('core.delete'))
+    {
+      JToolbarHelper::deleteList('', 'townofficals.delete', 'JTOOLBAR_DELETE');
+    }
+    if ($this->canDo->get('core.admin'))
+    {
+      JToolBarHelper::divider();
+      JToolBarHelper::preferences('com_townoffical');
+    }
   }
   /**
     * Method to set up the document properties

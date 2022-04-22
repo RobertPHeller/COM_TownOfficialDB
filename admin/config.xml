@@ -2,7 +2,7 @@
 <!--
     Created By    : Robert Heller
     Created       : Fri Apr 22 12:41:21 2022
-    Last Modified : <220422.1246>
+    Last Modified : <220422.1611>
 
     Description	
     
@@ -42,5 +42,21 @@
       <option value="0">JHIDE</option>
       <option value="1">JSHOW</option>
     </field>
+  </fieldset>
+  <fieldset
+    name="permissions"
+    label="JCONFIG_PERMISSIONS_LABEL"
+    description="JCONFIG_PERMISSIONS_DESC"
+    >
+    <field
+      name="rules"
+      type="rules"
+      label="JCONFIG_PERMISSIONS_LABEL"
+      class="inputbox"
+      validate="rules"
+      filter="rules"
+      component="com_townoffical"
+      section="component"
+    />
   </fieldset>
 </config>
