@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 16:37:54 2022
- *  Last Modified : <220422.1707>
+ *  Last Modified : <220422.1721>
  *
  *  Description	
  *
@@ -114,7 +114,7 @@ class TownOfficalViewTownOffical extends JViewLegacy
     $isNew = ($this->item->id == 0);
     
     JToolBarHelper::title($isNew ? JText::_('COM_TOWNOFFICAL_MANAGER_TOWNOFFICAL_NEW')
-                                 :  JText::_('COM_TOWNOFFICAL_MANAGER_TOWNOFFICAL_EDIT'))
+                                 :  JText::_('COM_TOWNOFFICAL_MANAGER_TOWNOFFICAL_EDIT'));
     
     // Build the actions for new and existing records.
     if ($isNew)
