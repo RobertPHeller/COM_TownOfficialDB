@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:29:20 2022
- *  Last Modified : <220422.1210>
+ *  Last Modified : <220423.1028>
  *
  *  Description	
  *
@@ -68,7 +68,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
         ?>
       </div>
     </div>
-    <table class="adminlist">
+    <table class="table table-striped table-hover">
       <thead><?php echo $this->loadTemplate('head'); ?></thead>
       <tfoot><?php echo $this->loadTemplate('foot'); ?></tfoot>
       <tbody><?php echo $this->loadTemplate('body'); ?></tbody>

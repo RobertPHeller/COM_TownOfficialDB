@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:35:13 2022
- *  Last Modified : <220422.1226>
+ *  Last Modified : <220423.1033>
  *
  *  Description	
  *
@@ -45,39 +45,39 @@
 defined('_JEXEC') or die('Restricted Access');
 ?>
 <?php if (!empty($this->items)) : ?>
-<?php foreach ($this->items as $i => $row): 
-$link = JRoute::_('index.php?option=com_townoffical&task=townoffical.edit&id=' . $row->id);
-?>
-<tr class="row<?php echo $i % 2; ?>">
-  <td>
-    <?php echo $this->pagination->getRowOffset($i); ?>
-  </td>
-  <td>
-    <?php echo JHtml::_('grid.id', $i, $row->id); ?>
-  </td>
-  <td>
-    <?php echo $row->office; ?>
-  </td>
-  <td>
-    <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_TOWNOFFICAL_EDIT_TOWNOFFICAL'); ?>">
-    <?php echo $row->name; ?>
-    </a>
-  </td>
-  <td>
-    <?php echo $row->auxoffice; ?>
-  </td>
-  <td>
-    <?php echo $row->termends; ?>
-  </td>
-  <td>
-    <?php echo $row->iselected; ?>
-  </td>
-  <td align="center">
-    <?php echo JHtml::_('jgrid.published', $row->published, $i, 'townofficals.', true, 'cb'); ?>
-  </td>
-  <td align="center">
-    <?php echo $row->id; ?>
-  </td>
-</tr>
-<?php endforeach; ?>
+  <?php foreach ($this->items as $i => $row): 
+      $link = JRoute::_('index.php?option=com_townoffical&task=townoffical.edit&id=' . $row->id);
+  ?>
+    <tr class="row<?php echo $i % 2; ?>">
+      <td>
+        <?php echo $this->pagination->getRowOffset($i); ?>
+      </td>
+      <td>
+        <?php echo JHtml::_('grid.id', $i, $row->id); ?>
+      </td>
+      <td>
+        <?php echo $row->office; ?>
+      </td>
+      <td>
+        <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_TOWNOFFICAL_EDIT_TOWNOFFICAL'); ?>">
+        <?php echo $row->name; ?>
+        </a>
+      </td>
+      <td>
+        <?php echo $row->auxoffice; ?>
+      </td>
+      <td>
+        <?php echo $row->termends; ?>
+      </td>
+      <td>
+        <?php echo $row->iselected; ?>
+      </td>
+      <td align="center">
+        <?php echo JHtml::_('jgrid.published', $row->published, $i, 'townofficals.', true, 'cb'); ?>
+      </td>
+      <td align="center">
+        <?php echo $row->id; ?>
+      </td>
+    </tr>
+  <?php endforeach; ?>
 <?php endif; ?>

@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 16:41:56 2022
- *  Last Modified : <220422.1632>
+ *  Last Modified : <220423.1004>
  *
  *  Description	
  *
@@ -117,9 +117,9 @@ class TownOfficalModelTownOffical extends JModelAdmin
   {
     // Check the session for previously entered form data.
     $data = JFactory::getApplication()->getUserState(
-                                                     'com_townoffical.edit.townoffical.data',
-                                                     array()
-                                                     );
+                            'com_townoffical.edit.townoffical.data',
+                            array()
+                            );
     
     if (empty($data))
     {

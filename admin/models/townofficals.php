@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:43:11 2022
- *  Last Modified : <220421.1749>
+ *  Last Modified : <220423.1002>
  *
  *  Description	
  *
@@ -65,7 +65,7 @@ class TownOfficalModelTownOfficals extends JModelList
     {
       $config['filter_fields'] = array(
                                        'id',
-                                       'office',
+                                       'name',
                                        'published'
                                        );
     }
@@ -100,7 +100,7 @@ class TownOfficalModelTownOfficals extends JModelList
     if (!empty($search))
     {
       $like = $db->quote('%' . $search . '%');
-      $query->where('office LIKE ' . $like);
+      $query->where('name LIKE ' . $like);
     }
     
     // Filter by published state
