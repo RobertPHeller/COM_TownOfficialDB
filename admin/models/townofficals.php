@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:43:11 2022
- *  Last Modified : <220423.1002>
+ *  Last Modified : <220423.1239>
  *
  *  Description	
  *
@@ -66,6 +66,8 @@ class TownOfficalModelTownOfficals extends JModelList
       $config['filter_fields'] = array(
                                        'id',
                                        'name',
+                                       'author',
+                                       'created',
                                        'published'
                                        );
     }
@@ -86,14 +88,18 @@ class TownOfficalModelTownOfficals extends JModelList
     // Create the base select statement.
     $query->select( 'a.id as id, a.name as name, a.auxoffice as auxoffice,'
                    .'a.termends as termends, a.iselected as iselected,'
-                   .'a.published as published')
+                   .'a.published as published, a.created as created')
           ->from($db->quoteName('#__townoffical', 'a'));
     
     // Join over the categories (offices).
     $query->select($db->quoteName('c.title', 'office'))
            ->join('LEFT', $db->quoteName('#__categories', 'c') . 
                   ' ON c.id = a.catid');
-    
+           
+    // Join with users table to get the username of the author
+    $query->select($db->quoteName('u.username', 'author'))
+          ->join('LEFT', $db->quoteName('#__users', 'u') . ' ON u.id = a.created_by');
+
     // Filter: like / search
     $search = $this->getState('filter.search');
     

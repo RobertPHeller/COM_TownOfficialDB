@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:32:22 2022
- *  Last Modified : <220421.1213>
+ *  Last Modified : <220423.1226>
  *
  *  Description	
  *
@@ -52,24 +52,30 @@ defined('_JEXEC') or die('Restricted Access');
   <?php echo JHtml::_('grid.checkall'); ?>
   </th>
   <th width="20%">
-  <?php echo JHtml::_('grid.sort', 'COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_OFFICE','office', $listDirn, $listOrder); ?>
+  <?php echo JHtml::_('searchtools.sort', 'COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_OFFICE','office', $listDirn, $listOrder); ?>
   </th>
-  <th width="30%">
-  <?php echo JHtml::_('grid.sort', 'COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_NAME','name', $listDirn, $listOrder); ?>
+  <th width="20%">
+  <?php echo JHtml::_('searchtools.sort', 'COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_NAME','name', $listDirn, $listOrder); ?>
   </th>
   <th width="10%">
-  <?php echo JHtml::_('grid.sort', 'COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_AUXOFFICE', 'auxoffice', $listDirn, $listOrder); ?>
+  <?php echo JHtml::_('searchtools.sort', 'COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_AUXOFFICE', 'auxoffice', $listDirn, $listOrder); ?>
   </th>
   <th width="5%">
-  <?php echo JHtml::_('grid.sort', 'COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_TERMENDS', 'termends', $listDirn, $listOrder); ?>
+  <?php echo JHtml::_('searchtools.sort', 'COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_TERMENDS', 'termends', $listDirn, $listOrder); ?>
   </th>
   <th width="5%">
-  <?php echo JHtml::_('grid.sort', 'COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_ISELECTED', 'iselected', $listDirn, $listOrder); ?>
+  <?php echo JHtml::_('searchtools.sort', 'COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_ISELECTED', 'iselected', $listDirn, $listOrder); ?>
+  </th>
+  <th width="20%">
+  <?php echo JHtml::_('searchtools.sort', 'COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_AUTHOR', 'author', $listDirn, $listOrder); ?>
+  </th>
+  <th width="10%">
+  <?php echo JHtml::_('searchtools.sort', 'COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_CREATED_DATE', 'created', $listDirn, $listOrder); ?>
   </th>
   <th width="5%">
-  <?php echo JHtml::_('grid.sort', 'COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_PUBLISHED', 'published', $listDirn, $listOrder); ?>
+  <?php echo JHtml::_('searchtools.sort', 'COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_PUBLISHED', 'published', $listDirn, $listOrder); ?>
   </th>
   <th width="2%">
-  <?php echo JHtml::_('grid.sort', 'COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_ID','id', $listDirn, $listOrder); ?>
+  <?php echo JHtml::_('searchtools.sort', 'COM_TOWNOFFICAL_TOWNOFFICAL_HEADING_ID','id', $listDirn, $listOrder); ?>
   </th>
 </tr>

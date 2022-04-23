@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:35:13 2022
- *  Last Modified : <220423.1122>
+ *  Last Modified : <220423.1228>
  *
  *  Description	
  *
@@ -81,6 +81,12 @@ defined('_JEXEC') or die('Restricted Access');
           {
             echo JText::_('JNO');
           } ?>
+      </td>
+      <td align="center">
+        <?php echo $row->author; ?>
+      </td>
+      <td align="center">
+        <?php echo substr($row->created, 0, 10); ?>
       </td>
       <td align="center">
         <?php echo JHtml::_('jgrid.published', $row->published, $i, 'townofficals.', true, 'cb'); ?>

@@ -2,7 +2,7 @@
 <!--
     Created By    : Robert Heller
     Created       : Thu Apr 21 11:10:34 2022
-    Last Modified : <220421.1112>
+    Last Modified : <220423.1234>
 
     Description	
     
@@ -46,6 +46,28 @@
     </field>
   </fields>
   <fields name="list">
+    <field
+      name="fullordering"
+      type="list"
+      label="COM_TOWNOFFICAL_LIST_FULL_ORDERING"
+      description="COM_TOWNOFFICAL_LIST_FULL_ORDERING_DESC"
+      onchange="this.form.submit();"
+      default="greeting ASC"
+      >
+      <option value="">JGLOBAL_SORT_BY</option>
+      <option value="name ASC">COM_TOWNOFFICAL_NAME_ASC</option>
+      <option value="name DESC">COM_TOWNOFFICAL_NAME_DESC</option>
+      <option value="termends ASC">COM_TOWNOFFICAL_TERMENDS_ASC</option>
+      <option value="termends DESC">COM_TOWNOFFICAL_TERMENDS_DESC</option>
+      <option value="id ASC">JGRID_HEADING_ID_ASC</option>
+      <option value="id DESC">JGRID_HEADING_ID_DESC</option>
+      <option value="published ASC">COM_TOWNOFFICAL_PUBLISHED_ASC</option>
+      <option value="published DESC">COM_TOWNOFFICAL_PUBLISHED_DESC</option>
+      <option value="author ASC">COM_TOWNOFFICAL_AUTHOR_ASC</option>
+      <option value="author DESC">COM_TOWNOFFICAL_AUTHOR_DESC</option>
+      <option value="created ASC">COM_TOWNOFFICAL_CREATED_ASC</option>
+      <option value="created DESC">COM_TOWNOFFICAL_CREATED_DESC</option>
+    </field>
     <field
       name="limit"
       type="limitbox"

@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:29:20 2022
- *  Last Modified : <220423.1028>
+ *  Last Modified : <220423.1217>
  *
  *  Description	
  *
@@ -75,8 +75,6 @@ $listDirn      = $this->escape($this->filter_order_Dir);
     </table>
     <input type="hidden" name="task" value=""/>
     <input type="hidden" name="boxchecked" value="0"/>
-    <input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
-    <input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
     <?php echo JHtml::_('form.token'); ?>
   </div>
 </form>

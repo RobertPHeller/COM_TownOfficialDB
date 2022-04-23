@@ -8,8 +8,8 @@
  *  Date          : $Date$
  *  Author        : $Author$
  *  Created By    : Robert Heller
- *  Created       : Wed Apr 20 14:37:04 2022
- *  Last Modified : <220423.1228>
+ *  Created       : Sat Apr 23 12:01:59 2022
+ *  Last Modified : <220423.1203>
  *
  *  Description	
  *
@@ -41,14 +41,39 @@
  *
  ****************************************************************************/
 
-// No direct access to this file
-defined('_JEXEC') or die('Restricted Access');
+// No direct access
+defined('_JEXEC') or die('Restricted access');
+JHtml::_('behavior.formvalidator');
+
 ?>
-<tfoot>
-<tr>
-  <td colspan="11">
-    <?php echo $this->pagination->getListFooter(); ?>
-  </td>
-</tr>
-</tfoot>
+<form action="<?php echo JRoute::_('index.php?option=com_townoffical&view=form&layout=edit'); ?>"
+ method="post" name="adminForm" id="adminForm" class="form-validate">
+
+  <div class="form-horizontal">
+    <fieldset class="adminform">
+    <legend><?php echo JText::_('COM_TOWNOFFICAL_LEGEND_DETAILS') ?></legend>
+    <div class="row-fluid">
+      <div class="span6">
+        <?php echo $this->form->renderFieldset('details');  ?>
+      </div>
+    </div>
+    </fieldset>
+  </div>
+  
+  <div class="btn-toolbar">
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary" onclick="Joomla.submitbutton('townoffical.save')">
+      <span class="icon-ok"></span><?php echo JText::_('JSAVE') ?>
+      </button>
+    </div>
+    <div class="btn-group">
+      <button type="button" class="btn" onclick="Joomla.submitbutton('townoffical.cancel')">
+      <span class="icon-cancel"></span><?php echo JText::_('JCANCEL') ?>
+      </button>
+    </div>
+  </div>
+
+  <input type="hidden" name="task" />
+  <?php echo JHtml::_('form.token'); ?>
+</form>
 
