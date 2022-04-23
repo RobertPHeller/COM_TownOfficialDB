@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:29:20 2022
- *  Last Modified : <220423.1551>
+ *  Last Modified : <220423.1606>
  *
  *  Description	
  *
@@ -49,8 +49,8 @@ JHtml::_('behavior.tooltip');
 
 JHtml::_('formbehavior.chosen', 'select');
 
-$listOrder     = $this->escape($this->filter_order);
-$listDirn      = $this->escape($this->filter_order_Dir);
+$listOrder     = $this->escape($this->state->get('list.ordering'));
+$listDirn      = $this->escape($this->state->get('list.direction'));
 $user = JFactory::getUser();
 $userId = $user->get('id');
 ?>
