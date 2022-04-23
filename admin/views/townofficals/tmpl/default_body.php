@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:35:13 2022
- *  Last Modified : <220423.1111>
+ *  Last Modified : <220423.1122>
  *
  *  Description	
  *
@@ -73,7 +73,14 @@ defined('_JEXEC') or die('Restricted Access');
           <?php echo $row->termends; ?>
       </td>
       <td>
-        <?php echo $row->iselected; ?>
+        <?php if ($row->iselected)
+          {
+            echo JText::_('JYES'); 
+          }
+          else
+          {
+            echo JText::_('JNO');
+          } ?>
       </td>
       <td align="center">
         <?php echo JHtml::_('jgrid.published', $row->published, $i, 'townofficals.', true, 'cb'); ?>
