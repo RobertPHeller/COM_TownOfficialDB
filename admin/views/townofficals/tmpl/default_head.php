@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:32:22 2022
- *  Last Modified : <220423.1226>
+ *  Last Modified : <220423.1609>
  *
  *  Description	
  *
@@ -43,6 +43,8 @@
 
 // No direct access to this file                                                         
 defined('_JEXEC') or die('Restricted Access');
+$listOrder     = $this->escape($this->state->get('list.ordering'));
+$listDirn      = $this->escape($this->state->get('list.direction'));
 ?>
 <tr>
   <th width="1%">
