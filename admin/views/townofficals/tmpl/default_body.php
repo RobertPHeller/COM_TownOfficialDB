@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:35:13 2022
- *  Last Modified : <220423.1033>
+ *  Last Modified : <220423.1111>
  *
  *  Description	
  *
@@ -66,8 +66,11 @@ defined('_JEXEC') or die('Restricted Access');
       <td>
         <?php echo $row->auxoffice; ?>
       </td>
-      <td>
-        <?php echo $row->termends; ?>
+      <td <?php 
+             $today = new DateTime("now");
+             $term  = new DateTime("$row->termends");
+             if ($today > $term) echo 'style="color:red;"'; ?>>
+          <?php echo $row->termends; ?>
       </td>
       <td>
         <?php echo $row->iselected; ?>

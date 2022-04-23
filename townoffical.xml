@@ -2,7 +2,7 @@
 <!--
     Created By    : Robert Heller
     Created       : Wed Apr 20 12:48:00 2022
-    Last Modified : <220422.1719>
+    Last Modified : <220423.1113>
 
     Description	
     
@@ -36,7 +36,7 @@
   <copyright>(C) Copyright 2022 Robert Heller</copyright>
   <license>GPL 2.0 or later</license>
   <!--  The version string is recorded in the components table -->
-  <version>0.0.14</version>
+  <version>0.0.15.1</version>
   <!-- The description is optional and defaults to the name -->
   <description>COM_TOWNOFFICAL_DESCRIPTION</description>
   <install> <!-- Runs on install -->
