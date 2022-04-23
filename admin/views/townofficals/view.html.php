@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:26:51 2022
- *  Last Modified : <220423.1241>
+ *  Last Modified : <220423.1544>
  *
  *  Description	
  *
@@ -70,9 +70,6 @@ class TownOfficalViewTownOfficals extends JViewLegacy
     $this->items= $this->get('Items');
     $this->pagination= $this->get('Pagination');
     $this->state= $this->get('State');
-    // Remove the old ordering mechanism
-    //$this->filter_order = $app->getUserStateFromRequest($context.'filter_order', 'filter_order', 'office', 'cmd');
-    //$this->filter_order_Dir = $app->getUserStateFromRequest($context.'filter_order_Dir', 'filter_order_Dir', 'asc', 'cmd');
     $this->filterForm    = $this->get('FilterForm');
     $this->activeFilters = $this->get('ActiveFilters');
     
@@ -128,6 +125,10 @@ class TownOfficalViewTownOfficals extends JViewLegacy
     if ($this->canDo->get('core.delete'))
     {
       JToolbarHelper::deleteList('', 'townofficals.delete', 'JTOOLBAR_DELETE');
+    }
+    if ($this->canDo->get('core.edit') || JFactory::getUser()->authorise('core.manage', 'com_checkin'))
+    {
+      JToolBarHelper::checkin('townofficals.checkin');
     }
     if ($this->canDo->get('core.admin'))
     {

@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:43:11 2022
- *  Last Modified : <220423.1239>
+ *  Last Modified : <220423.1540>
  *
  *  Description	
  *
@@ -88,7 +88,8 @@ class TownOfficalModelTownOfficals extends JModelList
     // Create the base select statement.
     $query->select( 'a.id as id, a.name as name, a.auxoffice as auxoffice,'
                    .'a.termends as termends, a.iselected as iselected,'
-                   .'a.published as published, a.created as created')
+                   .'a.published as published, a.created as created,'
+                   .'a.checked_out as checked_out, a.checked_out_time as checked_out_time')
           ->from($db->quoteName('#__townoffical', 'a'));
     
     // Join over the categories (offices).
@@ -99,7 +100,11 @@ class TownOfficalModelTownOfficals extends JModelList
     // Join with users table to get the username of the author
     $query->select($db->quoteName('u.username', 'author'))
           ->join('LEFT', $db->quoteName('#__users', 'u') . ' ON u.id = a.created_by');
-
+          
+    // Join with users table to get the username of the person who checked the record out
+    $query->select($db->quoteName('u2.username', 'editor'))
+          ->join('LEFT', $db->quoteName('#__users', 'u2') . ' ON u2.id = a.checked_out');
+          
     // Filter: like / search
     $search = $this->getState('filter.search');
     
