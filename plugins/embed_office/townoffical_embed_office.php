@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Sun Apr 24 11:10:30 2022
- *  Last Modified : <220424.1418>
+ *  Last Modified : <220424.1848>
  *
  *  Description	
  *
@@ -78,44 +78,54 @@ jimport( 'joomla.plugin.plugin' );
 //} 
 //require_once( JPATH_ROOT . DS . 'components' . DS . 'com_townoffical' . DS . 'helpers' . DS .'pluginhelper.php' );
 
-class plgContentTownOfficalEmbedOffice extends JPlugin {
-  
-  protected $app;
-  protected $db;
-  
-  function __construct(&$subject, $article_params)
-  {
-    parent::__construct($subject, $article_params);
-    $db = JFactory::getDBO();
-    $app = JFactory::getApplication();
-  }
+class PlgContentTownoffical_embed_office extends JPlugin {
   
   function onContentPrepare($context, &$article, &$params, $limitstart)
   {
-    if ($app->isSite()) 
+    // Don't run this plugin when the content is being indexed
+    if ($context == 'com_finder.indexer')
     {
-      // Simple performance check to determine whether bot should process further
-      if (isset($article->text))
-      {
-        if (strpos($article->text, '{townoffical') === false)
-        {
-          return;
-        }
-      }
-      else
-      {
-        return;
-      }
-      
-      $regex = '#{townoffical "([^"]*)"[[:space:]]*([^}]*)}#s'
-      $article->text = preg_replace_callback($regex, 
-                                             array($this, 'embed_officals'), 
-                                             $article->text);
       return true;
     }
+    // Simple performance check to determine whether bot should process further
+    if (isset($article->text))
+    {
+      if (strpos($article->text, '{townoffical') === false)
+      {
+        return true;
+      }
+    }
+    else
+    {
+      return;
+    }
+    
+    $regex = '#{townoffical[[:space:]]+"([^"]*)"[[:space:]]*([^}]*)}#';
+    $result = preg_match_all($regex,$article->text,$matches, PREG_SET_ORDER);
+    
+    // No matches, skip this
+    if ($matches)
+    {
+      foreach ($matches as $match)
+      {
+        $replacePattern = "|".$match[0]."|";
+        $replacement = $this->embed_officals($match);
+        $article->text = preg_replace($replacePattern,$replacement,$article->text, 1);
+      }
+    }
+    
+    return true;
   }
-  function _parseOpts($opts,$options)
+  function _parseOpts($opts)
   {
+    $options = array('member' => true,
+                     'term' => true,
+                     'beforeall' => '<p>',
+                     'before' => '',
+                     'after' => '<br />',
+                     'afterall' => '</p>',
+                     'class' => 'townoffical');
+
     preg_match_all('/([[:alpha:]]+)=(|0|1|(<[^>]+>))[[:space:]]/',$opts.' ',$outs,
                    PREG_SET_ORDER);
     foreach ($outs as $out)
@@ -127,30 +137,29 @@ class plgContentTownOfficalEmbedOffice extends JPlugin {
   
   function embed_officals($matches)
   {
-    $office = $matches[1];
-    $options = $this->_parseOpts ($matches[2],
-                                  array('member' => true,
-                                        'term' => true,
-                                        'beforeall' => '<p>',
-                                        'before' => '',
-                                        'after' => '<br />',
-                                        'afterall' => '</p>',
-                                        'class' => 'townoffical'));
     
+    $office = $matches[1];
+    $options = $this->_parseOpts ($matches[2]);
+    $result = '';
+    $db = JFactory::getDbo();
     $query = $db->getQuery(true);
-    $query->select('o.id as id, o.name as name, o.auxoffice as member, o.termends as termends, c.title as office')
+    $query->select('o.id as id, o.name as name, o.auxoffice as member, '.
+                   'o.termends as termends, c.title as office')
           ->from('#__townoffical as o')
           ->leftJoin('#__categories as c ON o.catid=c.id')
-          ->where('o.published = 1 AND office = '.$db->quote($office));
-    $items = $db->loadObjectList('id');
-    $result = '<div class=".$options['class'].">'.$options['beforeall'];
+          ->where('o.published = 1 AND c.title = '.$db->quote($office));
+    //$result .= "<!-- query is ".(string)$query." -->";
+    $db->setQuery( (string)$query );
+    $items = $db->loadObjectList();
+    //$result .= '<!-- items are '.print_r($items,true).' -->';      
+    $result .= "<div class=".$options['class'].">".$options['beforeall'];
     foreach ($items as $item)
     {
       $result .= $options['before'];
       $result .= $item->name;
       if ($options['member'] && $item->member != '')
       {
-        $result .= ',&nbsp;'.$item->member
+        $result .= ',&nbsp;'.$item->member;
       }
       if ($options['term']) {
         $result .= '&nbsp;'.date_format ( date_create($item->termends), 'Y' );

@@ -2,7 +2,7 @@
 <!--
     Created By    : Robert Heller
     Created       : Wed Apr 20 12:48:00 2022
-    Last Modified : <220424.1106>
+    Last Modified : <220424.1506>
 
     Description	
     
@@ -39,6 +39,8 @@
   <version>0.0.25</version>
   <!-- The description is optional and defaults to the name -->
   <description>COM_TOWNOFFICAL_DESCRIPTION</description>
+  <!-- Runs on install/uninstall/update -->
+  <scriptfile>script.php</scriptfile>
   <install> <!-- Runs on install -->
     <sql>
       <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>

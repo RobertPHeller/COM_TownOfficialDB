@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Sat Apr 23 10:48:22 2022
- *  Last Modified : <220423.1050>
+ *  Last Modified : <220424.1611>
  *
  *  Description	
  *
@@ -44,6 +44,11 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
+if (!defined('DS')){
+  define('DS',DIRECTORY_SEPARATOR);
+} 
+
+
 /**
   * Script file of TownOffical component.
   *
@@ -64,7 +69,23 @@ defined('_JEXEC') or die('Restricted access');
   * @copyright   Copyright (C) 2005 - 2018 Open Source Matters, Inc. All rights reserved.
   * @license     GNU General Public License version 2 or later; see LICENSE.txt
   */
-class com_townOfficalInstallerScript
+
+setlocale(LC_ALL, 'C.UTF-8', 'C');
+
+use Joomla\CMS\Application\ApplicationHelper;
+use Joomla\Utilities\ArrayHelper; 
+use Joomla\String\StringHelper;
+use Joomla\CMS\Factory;
+
+JHtml::_('behavior.formvalidator');
+JHtml::_('behavior.keepalive');
+
+jimport('joomla.filesystem.folder');
+jimport('joomla.filesystem.file');
+jimport('joomla.log.log');
+
+
+class com_townofficalInstallerScript
 {
   /**
     * This method is called after a component is installed.
@@ -75,9 +96,68 @@ class com_townOfficalInstallerScript
     */
   public function install($parent) 
   {
-    $parent->getParent()->setRedirectURL('index.php?option=com_townoffical');
-  }
-  
+    /*                                                                      
+      / Install modules and plugins                                           
+      */                                                                      
+    jimport('joomla.installer.installer');                                  
+    $status = new JObject();                                                
+    $status->modules = array();                                             
+    $status->plugins = array();                                             
+    $src_modules = dirname(__FILE__).DS.'modules';                          
+    $src_plugins = dirname(__FILE__).DS.'plugins';     
+    // plugins
+    $installer = new JInstaller;
+    $result = $installer->install($src_plugins.DS.'embed_office');
+    $status->plugins[] = array('name'=>'Embed Town Officals',
+                               'group'=>'content', 
+                               'result'=>$result);
+      ?>
+      <hr>
+      <div class="adminlist" style="">
+        <?php
+          /*
+            / Display the results from the extension installation
+            */ 
+          
+          $rows = 0;
+        ?>                           
+
+        <table class="adminlist" style="width: 100%; margin:10px 10px 10px 10px;">
+            <thead>
+                <tr>
+                    <th class="title" style="text-align:left;"><?php echo JText::_('COM_TOWNOFFICAL_INSTALL_EXTENSION'); ?></th>
+                    <th style="width: 50%; text-align:center;"><?php echo JText::_('COM_TOWNOFFICAL_INSTALL_STATUS'); ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (count($status->modules)) : ?>
+                <tr>
+                    <th style="text-align:left;"><?php echo JText::_('COM_TOWNOFFICAL_INSTALL_MODULE'); ?></th>
+                </tr>
+                <?php foreach ($status->modules as $module) : ?>
+                <tr class="row<?php echo (++ $rows % 2); ?>">
+                    <td class="key"><?php echo $module['name']; ?></td>
+                    <td style="text-align:center;"><?php echo ($module['result'])?JText::_('COM_TOWNOFFICAL_INSTALL_INSTALLED'):JText::_('COM_TOWNOFFICAL_INSTALL_NOT_INSTALLED'); ?></td>
+                </tr>
+                <?php endforeach;?>
+                <?php endif;?>
+                <?php if (count($status->plugins)) : ?>
+                <tr>
+                    <th style="text-align:left;"><?php echo JText::_('COM_TOWNOFFICAL_INSTALL_PLUGIN'); ?></th>
+                </tr>
+                <?php foreach ($status->plugins as $plugin) : ?>
+                <tr class="row<?php echo (++ $rows % 2); ?>">
+                    <td class="key"><?php echo ucfirst($plugin['name']); ?></td>
+                    <td style="text-align:center;"><?php echo ($plugin['result'])?JText::_('COM_TOWNOFFICAL_INSTALL_INSTALLED'):JText::_('COM_TOWNOFFICAL_INSTALL_NOT_INSTALLED'); ?></td>
+                </tr>
+                <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
+        <?php
+        }
+
+    
   /**
     * This method is called after a component is uninstalled.
     *
@@ -99,7 +179,67 @@ class com_townOfficalInstallerScript
     */
   public function update($parent) 
   {
-    echo '<p>' . JText::sprintf('COM_TOWNOFFICAL_UPDATE_TEXT', $parent->get('manifest')->version) . '</p>';
+        // install the new modules when this not already exists
+        jimport('joomla.installer.installer');
+
+        $status = new JObject();
+        $status->modules = array();
+        $status->plugins = array();
+        
+        $src_modules = dirname(__FILE__).DS.'modules';
+        $src_plugins = dirname(__FILE__).DS.'plugins';
+        
+        // we must install again all modules and plugins since it can be that we must also install here an update
+        // plugins
+        $installer = new JInstaller;
+        $result = $installer->install($src_plugins.DS.'embed_office');
+        $status->plugins[] = array('name'=>'Embed Town Officals',
+                                   'group'=>'content', 
+                                   'result'=>$result);
+      ?>
+      <hr>
+      <div class="adminlist" style="">
+        <?php
+          /*
+            / Display the results from the extension installation
+            */ 
+          
+          $rows = 0;
+        ?>                           
+
+        <table class="adminlist" style="width: 100%; margin:10px 10px 10px 10px;">
+            <thead>
+                <tr>
+                    <th class="title" style="text-align:left;"><?php echo JText::_('COM_TOWNOFFICAL_INSTALL_EXTENSION'); ?></th>
+                    <th style="width: 50%; text-align:center;"><?php echo JText::_('COM_TOWNOFFICAL_INSTALL_STATUS'); ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (count($status->modules)) : ?>
+                <tr>
+                    <th style="text-align:left;"><?php echo JText::_('COM_TOWNOFFICAL_INSTALL_MODULE'); ?></th>
+                </tr>
+                <?php foreach ($status->modules as $module) : ?>
+                <tr class="row<?php echo (++ $rows % 2); ?>">
+                    <td class="key"><?php echo $module['name']; ?></td>
+                    <td style="text-align:center;"><?php echo ($module['result'])?JText::_('COM_TOWNOFFICAL_INSTALL_INSTALLED'):JText::_('COM_TOWNOFFICAL_INSTALL_NOT_INSTALLED'); ?></td>
+                </tr>
+                <?php endforeach;?>
+                <?php endif;?>
+                <?php if (count($status->plugins)) : ?>
+                <tr>
+                    <th style="text-align:left;"><?php echo JText::_('COM_TOWNOFFICAL_INSTALL_PLUGIN'); ?></th>
+                </tr>
+                <?php foreach ($status->plugins as $plugin) : ?>
+                <tr class="row<?php echo (++ $rows % 2); ?>">
+                    <td class="key"><?php echo ucfirst($plugin['name']); ?></td>
+                    <td style="text-align:center;"><?php echo ($plugin['result'])?JText::_('COM_TOWNOFFICAL_INSTALL_INSTALLED'):JText::_('COM_TOWNOFFICAL_INSTALL_NOT_INSTALLED'); ?></td>
+                </tr>
+                <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
+        <?php
   }
   
   /**
