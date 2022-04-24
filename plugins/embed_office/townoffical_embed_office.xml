@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    Created By    : Robert Heller
+    Created       : Sun Apr 24 11:02:46 2022
+    Last Modified : <220424.1423>
+
+    Description	
+    
+    Copyright (C) 2022  Robert Heller D/B/A Deepwoods Software
+			51 Locke Hill Road
+			Wendell, MA 01379-9728
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+ 
+-->
+<extension version="3.1" type="plugin" group="content">
+  <name>Embed Town Officals by Office</name>
+  <creationDate>April 2022</creationDate>
+  <author>Robert Heller</author>
+  <authorEmail>heller@deepsoft.com</authorEmail>
+  <authorUrl>https://www.deepsoft.com/</authorUrl>
+  <copyright>(C) Copyright 2022 Robert Heller</copyright>
+  <license>GPL 2.0 or later</license>
+  <version>0.0.1</version>
+  <description>
+  Usage:
+ 
+  {townoffical "office" opts}       where office is the name of an office 
+                                    and opts are optional options:
+                                    -  member=1   Include member office (default)
+                                    -  member=0   Don't include member office
+                                    -  term=1     Include term ending year (default)
+                                    -  term=0     Don't include term ending year
+                                    -  beforeall=tag Default: beforeall=&lt;p&gt;
+                                    -  before=tag Default: before=
+                                    -  after=tag  Default: after=&lt;br /&gt;
+                                    -  afterall=tag Default: afterall=&lt;/p&gt;
+                                    -  class=class Outer div class Default: townoffical
+                                    Example:
+                                    {townoffical "Board of Health"
+                                      member=0 term=0 beforeall=&lt;ul&gt;
+                                      before=&lt;li&gt; after=&lt;/li&gt;
+                                      afterall=&lt;/ul&gt;}
+                                    Generates something like this:
+  &lt;div class="townoffical"&gt;&lt;ul&gt;&lt;li&gt;Barbara Craddock&lt;/li&gt;
+                               &lt;li&gt;Shay Cooper&lt;/li&gt;
+                               &lt;li&gt;Judith Bailey&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+ </description>
+  <files>
+    <filename plugin="townoffical_embed_office">townoffical_embed_office.php</filename>
+  </files>
+</extension>
+
