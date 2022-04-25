@@ -2,7 +2,7 @@
 <!--
     Created By    : Robert Heller
     Created       : Sun Apr 24 11:02:46 2022
-    Last Modified : <220424.1856>
+    Last Modified : <220425.1107>
 
     Description	
     
@@ -34,7 +34,7 @@
   <authorUrl>https://www.deepsoft.com/</authorUrl>
   <copyright>(C) Copyright 2022 Robert Heller</copyright>
   <license>GPL 2.0 or later</license>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
   <description>COM_TOWNOFFICAL_EMBED_OFFICE_DESCRIPTION</description>
   <files>
     <filename plugin="townoffical_embed_office">townoffical_embed_office.php</filename>
