@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Sun Apr 24 11:10:30 2022
- *  Last Modified : <220425.1052>
+ *  Last Modified : <220425.1117>
  *
  *  Description	
  *
@@ -143,7 +143,7 @@ class PlgContentTownoffical_embed_office extends JPlugin {
   }
   function _parseOpts($opts,$defaults)
   {
-    $options = $defaults
+    $options = $defaults;
 
     preg_match_all('/([[:alpha:]]+)=(|0|1|(<[^>]+>))[[:space:]]/',$opts.' ',$outs,
                    PREG_SET_ORDER);
@@ -201,6 +201,7 @@ class PlgContentTownoffical_embed_office extends JPlugin {
                                                     'class' => 'townunit',
                                                     'htag' => 'h4'));
     $result = '';
+    //$result .= "<!-- unit is $unit, options are ".print_r($option,true)." -->";
     $db = JFactory::getDbo();
     $query = $db->getQuery(true);
     $query->select('id,title,description')
