@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Sun Apr 24 11:10:30 2022
- *  Last Modified : <220424.1848>
+ *  Last Modified : <220425.1052>
  *
  *  Description	
  *
@@ -62,6 +62,16 @@
  *                              <li>Shay Cooper</li>
  *                              <li>Judith Bailey</li></ul></div>
  *                              
+ * {townunit "unit" opts}            where unit is the name of an office
+ *                                   and opts are optional options:
+ *                                   - description=1 Include the description (default)
+ *                                   - description=0 Don't include the descriptio
+ *                                   - htag=tag Default: h4
+ *                                   -  class=class Outer div class Default: townunit
+ *                                   Example:
+ *                                   {townunit "Board of Health"}
+ *                                   Generates something like this:
+ * <div class="townunit"><h4>Board of Health</h4>This is the board of health</div>
  *
  ****************************************************************************/
 
@@ -90,7 +100,8 @@ class PlgContentTownoffical_embed_office extends JPlugin {
     // Simple performance check to determine whether bot should process further
     if (isset($article->text))
     {
-      if (strpos($article->text, '{townoffical') === false)
+      if (strpos($article->text, '{townoffical') === false &&
+          strpos($article->text, '{townunit') === false)
       {
         return true;
       }
@@ -114,17 +125,25 @@ class PlgContentTownoffical_embed_office extends JPlugin {
       }
     }
     
+    $regex = '#{townunit[[:space:]]+"([^"]*)"[[:space:]]*([^}]*)}#';
+    $result = preg_match_all($regex,$article->text,$matches, PREG_SET_ORDER);
+    
+    // No matches, skip this
+    if ($matches)
+    {
+      foreach ($matches as $match)
+      {
+        $replacePattern = "|".$match[0]."|";
+        $replacement = $this->embed_unit($match);
+        $article->text = preg_replace($replacePattern,$replacement,$article->text, 1);
+      }
+    }
+    
     return true;
   }
-  function _parseOpts($opts)
+  function _parseOpts($opts,$defaults)
   {
-    $options = array('member' => true,
-                     'term' => true,
-                     'beforeall' => '<p>',
-                     'before' => '',
-                     'after' => '<br />',
-                     'afterall' => '</p>',
-                     'class' => 'townoffical');
+    $options = $defaults
 
     preg_match_all('/([[:alpha:]]+)=(|0|1|(<[^>]+>))[[:space:]]/',$opts.' ',$outs,
                    PREG_SET_ORDER);
@@ -139,7 +158,13 @@ class PlgContentTownoffical_embed_office extends JPlugin {
   {
     
     $office = $matches[1];
-    $options = $this->_parseOpts ($matches[2]);
+    $options = $this->_parseOpts ($matches[2],array('member' => true,
+                                                    'term' => true,
+                                                    'beforeall' => '<p>',
+                                                    'before' => '',
+                                                    'after' => '<br />',
+                                                    'afterall' => '</p>',
+                                                    'class' => 'townoffical'));
     $result = '';
     $db = JFactory::getDbo();
     $query = $db->getQuery(true);
@@ -169,5 +194,32 @@ class PlgContentTownoffical_embed_office extends JPlugin {
     $result .= $options['afterall'].'</div>';
     return $result;          
   }
+  function embed_unit($matches)
+  {
+    $unit = $matches[1];
+    $options = $this->_parseOpts ($matches[2],array('description' => true,
+                                                    'class' => 'townunit',
+                                                    'htag' => 'h4'));
+    $result = '';
+    $db = JFactory::getDbo();
+    $query = $db->getQuery(true);
+    $query->select('id,title,description')
+    ->from('#__categories')
+    ->where('published = 1 AND extension="com_townoffical" and title = '.$db->quote($unit));
+    $db->setQuery( (string)$query );
+    $item = $db->loadObject();
+    if ($item)
+    {
+      $result .= "<div class=".$options['class'].">";
+      $result .= "<".$options['htag'].">".$item->title."</".$options['htag'].">";
+      if ($options['description'])
+      {
+        $result .= $item->description;
+      }
+      $result .= "</div>";
+    }
+    return $result;
+  }
+    
 }
 
