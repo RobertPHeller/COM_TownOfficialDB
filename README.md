@@ -51,9 +51,7 @@ Example:   `{townoffical "Board of Health"
 
 Generates something like this:
 
-`<div class="townoffical"><ul><li>Barbara Craddock</li>
-   <li>Shay Cooper</li>
-   <li>Judith Bailey</li></ul></div>`
+`<div class="townoffical"><ul><li>Barbara Craddock</li><li>Shay Cooper</li><li>Judith Bailey</li></ul></div>`
 
 Unit:
 
