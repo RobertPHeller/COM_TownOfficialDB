@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    Created By    : Robert Heller
+    Created       : Mon Apr 25 13:36:20 2022
+    Last Modified : <220425.1349>
+
+    Description	
+    
+    Copyright (C) 2022  Robert Heller D/B/A Deepwoods Software
+			51 Locke Hill Road
+			Wendell, MA 01379-9728
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+ 
+-->
+<extension type="module" client="site" version="3.1" method="upgrade">
+  <name>Town Offical Unit Sidebar</name>
+  <creationDate>April 2022</creationDate>
+  <author>Robert Heller</author>
+  <authorEmail>heller@deepsoft.com</authorEmail>
+  <authorUrl>https://www.deepsoft.com/</authorUrl>
+  <copyright>(C) Copyright 2022 Robert Heller</copyright>
+  <license>GPL 2.0 or later</license>
+  <version>1.0.0</version>
+  <description>COM_TOWNOFFICAL_MOD_TOWNOFFICAL_UNIT_SIDEBAR_DESCR</description>
+  <files>
+    <filename module="mod_townoffical_unit_sidebar">mod_townoffical_unit_sidebar.php</filename>
+    <filename>helper.php</filename>
+    <filename>mod_townoffical_unit_sidebar.xml</filename>
+    <folder>tmpl</folder>
+    <folder>language</folder>
+    <folder>fields</folder>
+  </files>
+  <config>
+    <fields name="params" addfieldpath="/modules/mod_townoffical_unit_sidebar/fields">
+      <fieldset name="basic">
+        <field name="catid" type="toCategorySelectPure" multiple="false"
+          default="" label="MOD_TOWNOFFICAL_UNIT_NAME_LABEL" 
+          description="MOD_TOWNOFFICAL_UNIT_NAME_DESC"/>
+      </fieldset>
+    </fields>
+  </config>
+</extension>
+
