@@ -2,7 +2,7 @@
 <!--
     Created By    : Robert Heller
     Created       : Mon Apr 25 13:36:20 2022
-    Last Modified : <220425.1349>
+    Last Modified : <220427.1024>
 
     Description	
     
@@ -47,9 +47,9 @@
   <config>
     <fields name="params" addfieldpath="/modules/mod_townoffical_unit_sidebar/fields">
       <fieldset name="basic">
-        <field name="catid" type="toCategorySelectPure" multiple="false"
+        <field name="catid" type="category" extension="com_townoffical"
           default="" label="MOD_TOWNOFFICAL_UNIT_NAME_LABEL" 
-          description="MOD_TOWNOFFICAL_UNIT_NAME_DESC"/>
+          description="MOD_TOWNOFFICAL_UNIT_NAME_DESC" required="true" />
       </fieldset>
     </fields>
   </config>

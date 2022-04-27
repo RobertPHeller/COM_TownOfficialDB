@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 27 09:46:47 2022
- *  Last Modified : <220427.0954>
+ *  Last Modified : <220427.1030>
  *
  *  Description	
  *
@@ -48,6 +48,7 @@ class ModTownOfficalHelper
   static function getOfficals($unitcat)
   {
     $db = JFactory::getDbo();
+    $query = $db->getQuery(true);
     $query->select('o.id as id, o.name as name, o.auxoffice as member, '.
                    'o.termends as termends, c.title as office');
     $query->from('#__townoffical as o');
