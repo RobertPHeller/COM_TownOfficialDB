@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Sat Apr 23 10:48:22 2022
- *  Last Modified : <220424.1611>
+ *  Last Modified : <220427.1010>
  *
  *  Description	
  *
@@ -111,6 +111,9 @@ class com_townofficalInstallerScript
     $status->plugins[] = array('name'=>'Embed Town Officals',
                                'group'=>'content', 
                                'result'=>$result);
+    $result = $installer->install($src_modules.DS.'mod_townoffical_unit_sidebar');
+    $status->modules[] = array('name'=>'Town Officals Module',
+                               'result'=>$result);
       ?>
       <hr>
       <div class="adminlist" style="">
@@ -195,6 +198,9 @@ class com_townofficalInstallerScript
         $result = $installer->install($src_plugins.DS.'embed_office');
         $status->plugins[] = array('name'=>'Embed Town Officals',
                                    'group'=>'content', 
+                                   'result'=>$result);
+        $result = $installer->install($src_modules.DS.'mod_townoffical_unit_sidebar');
+        $status->modules[] = array('name'=>'Town Officals Module',
                                    'result'=>$result);
       ?>
       <hr>
