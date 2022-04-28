@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 16:35:28 2022
- *  Last Modified : <220428.1317>
+ *  Last Modified : <220428.1725>
  *
  *  Description	
  *
@@ -77,7 +77,23 @@ class TownOfficalControllerTownOfficals extends JControllerAdmin
   }
   public function import()
   {
+    $this->setRedirect(Route::_('index.php?option=com_townoffical&view=importform', false));
+  }
+  public function cancelimport()
+  {
+    $this->setRedirect(Route::_('index.php?option=com_townoffical&view=townofficals', false));
+  }
+  public function doimport()
+  {
+    // Check for request forgeries.
+    $this->checkToken();
     
+    $files = $_FILES['jform'];
+    $tmp_name = $files['tmp_name']['file'];
+    //$fp = fopen($tmp_name,"r");
+                                  
+    //fclose($fp);
+    $this->setRedirect(Route::_('index.php?option=com_townoffical&view=townofficals', false));
   }
   private function getCsvData($data)
   {
@@ -148,7 +164,6 @@ class TownOfficalControllerTownOfficals extends JControllerAdmin
       }
       
       fclose($output);
-      $app->triggerEvent('onAfterLogExport', array());
       $app->close();
     }
     else
