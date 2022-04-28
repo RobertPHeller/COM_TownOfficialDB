@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:26:51 2022
- *  Last Modified : <220423.1544>
+ *  Last Modified : <220428.1129>
  *
  *  Description	
  *
@@ -126,6 +126,11 @@ class TownOfficalViewTownOfficals extends JViewLegacy
     {
       JToolbarHelper::deleteList('', 'townofficals.delete', 'JTOOLBAR_DELETE');
     }
+    if ($this->canDo->get('core.create'))
+    {
+      JToolbarHelper::custom('townofficals.import','upload.png','import_f2.png','Import',false);
+    }
+    JToolbarHelper::custom('townofficals.export','download.png','export_f2.png','Export',false);
     if ($this->canDo->get('core.edit') || JFactory::getUser()->authorise('core.manage', 'com_checkin'))
     {
       JToolBarHelper::checkin('townofficals.checkin');

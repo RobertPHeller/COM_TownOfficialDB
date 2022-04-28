@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:43:11 2022
- *  Last Modified : <220423.1540>
+ *  Last Modified : <220428.1222>
  *
  *  Description	
  *
@@ -133,5 +133,28 @@ class TownOfficalModelTownOfficals extends JModelList
     $query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));
     
     return $query;
+  }
+  
+  public function getOfficalsDataAsIterator()
+  {
+    // Initialize variables.
+    $db    = JFactory::getDbo();
+    $query = $db->getQuery(true);
+    
+    // Create the base select statement.
+    $query->select( 'a.name as name, a.auxoffice as auxoffice,'
+                   .'a.termends as termends, a.iselected as iselected,'
+                   .'a.swornindate as swornindate,'
+                   .'a.ethicsexpires as ethicsexpires, a.email as email,'
+                   .'a.telephone as telephone, a.notes as notes')
+          ->from($db->quoteName('#__townoffical', 'a'));
+    
+    // Join over the categories (offices).
+    $query->select($db->quoteName('c.title', 'office'))
+           ->join('LEFT', $db->quoteName('#__categories', 'c') . 
+                  ' ON c.id = a.catid');
+    $db->setQuery($query);
+    return $db->getIterator();       
+           
   }
 }

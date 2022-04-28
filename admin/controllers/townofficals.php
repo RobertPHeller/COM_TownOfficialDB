@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 16:35:28 2022
- *  Last Modified : <220420.1636>
+ *  Last Modified : <220428.1317>
  *
  *  Description	
  *
@@ -44,6 +44,13 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\CMS\Component\ComponentHelper;
+use Joomla\CMS\Date\Date;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
+use Joomla\Utilities\ArrayHelper;
+
 /**
   * TownOfficals Controller
   *
@@ -67,6 +74,88 @@ class TownOfficalControllerTownOfficals extends JControllerAdmin
     $model = parent::getModel($name, $prefix, $config);
     
     return $model;
+  }
+  public function import()
+  {
+    
+  }
+  private function getCsvData($data)
+  {
+    if (!is_iterable($data))
+    {
+      throw new InvalidArgumentException(
+               sprintf('%s() requires an array or object implementing the Traversable interface, a %s was given.',
+                       __METHOD__,
+                       gettype($data) === 'object' ? get_class($data) : gettype($data)
+                       )
+               );
+    }
+    $disabledText = Text::_('COM_TOWNOFFICAL_DISABLED');
+      
+    // Header row
+    yield array('Office','Name','Aux Office','Term Ends','Sworn In Date',
+                'Ethics Expires','Is Elected','E-Mail','Phone','Notes');
+    foreach ($data as $offical)
+    {
+      yield array('office' =>        $offical->office,
+                  'name'   =>        $offical->name,
+                  'auxoffice' =>     $offical->auxoffice,
+                  'termends' =>      $offical->termends,
+                  'swornindate' =>   $offical->swornindate,
+                  'ethicsexpires' => $offical->ethicsexpires,
+                  'iselected' =>     $offical->iselected,
+                  'email' =>         $offical->email,
+                  'telephone' =>     $offical->telephone,
+                  'notes' =>         $offical->notes);
+    }
+  }
+  public function export()
+  {
+    // Check for request forgeries.
+    $this->checkToken();
+    $model = $this->getModel('TownOfficals');
+    $data = $model->getOfficalsDataAsIterator();
+    if (count($data))
+    {
+      try
+      {
+        $rows = $this->getCsvData($data);
+      }
+      catch (InvalidArgumentException $exception)
+      {
+        $this->setMessage(Text::_('COM_TOWNOFFICAL_ERROR_COULD_NOT_EXPORT_DATA'), 'error');
+        $this->setRedirect(Route::_('index.php?option=com_townoffical&view=townofficals', false));
+        
+        return;
+      }
+      // Destroy the iterator now
+      unset($data);
+      $date     = new Date('now', new DateTimeZone('UTC'));
+      $filename = 'officals_' . $date->format('Y-m-d_His_T');
+      $csvDelimiter = ComponentHelper::getComponent('com_townoffical')->getParams()->get('csv_delimiter', ',');
+      
+      $app = Factory::getApplication();
+      $app->setHeader('Content-Type', 'application/csv', true)
+      ->setHeader('Content-Disposition', 'attachment; filename="' . $filename . '.csv"', true)
+      ->setHeader('Cache-Control', 'must-revalidate', true)
+      ->sendHeaders();
+      
+      $output = fopen("php://output", "w");
+      
+      foreach ($rows as $row)
+      {
+        fputcsv($output, $row, $csvDelimiter);
+      }
+      
+      fclose($output);
+      $app->triggerEvent('onAfterLogExport', array());
+      $app->close();
+    }
+    else
+    {
+      $this->setMessage(Text::_('COM_TOWNOFFICAL_NO_OFFICALS_TO_EXPORT'));
+      $this->setRedirect(Route::_('index.php?option=com_townoffical&view=townofficals', false));
+    }
   }
 }
 
