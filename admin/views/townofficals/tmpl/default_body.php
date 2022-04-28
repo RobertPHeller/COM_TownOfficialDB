@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:35:13 2022
- *  Last Modified : <220423.1548>
+ *  Last Modified : <220428.1055>
  *
  *  Description	
  *
@@ -43,6 +43,9 @@
 
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
+$user = JFactory::getUser();
+$userId = $user->get('id');
+
 ?>
 <?php if (!empty($this->items)) : ?>
   <?php foreach ($this->items as $i => $row): 
@@ -61,7 +64,7 @@ defined('_JEXEC') or die('Restricted Access');
       <td>
         <?php if ($row->checked_out) : ?>
           <?php $canCheckin = $user->authorise('core.manage', 'com_checkin') || $row->checked_out == $userId; ?>
-          <?php echo JHtml::_('jgrid.checkedout', $i, $row->editor, $row->checked_out_time, 'helloworlds.', $canCheckin); ?>
+          <?php echo JHtml::_('jgrid.checkedout', $i, $row->editor, $row->checked_out_time, 'townofficals.', $canCheckin); ?>
         <?php endif; ?>
         <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_TOWNOFFICAL_EDIT_TOWNOFFICAL'); ?>">
         <?php echo $row->name; ?>

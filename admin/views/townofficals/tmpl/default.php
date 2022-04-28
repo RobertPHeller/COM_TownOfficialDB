@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:29:20 2022
- *  Last Modified : <220423.1609>
+ *  Last Modified : <220428.1320>
  *
  *  Description	
  *
@@ -51,8 +51,6 @@ JHtml::_('formbehavior.chosen', 'select');
 
 $listOrder     = $this->escape($this->state->get('list.ordering'));
 $listDirn      = $this->escape($this->state->get('list.direction'));
-$user = JFactory::getUser();
-$userId = $user->get('id');
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_townoffical&view=townofficals'); ?>" method="post" name="adminForm" id="adminForm">
   <div id="j-sidebar-container" class="span2">
