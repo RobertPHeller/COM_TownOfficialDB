@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 16:35:28 2022
- *  Last Modified : <220428.1725>
+ *  Last Modified : <220429.1908>
  *
  *  Description	
  *
@@ -51,6 +51,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 use Joomla\Utilities\ArrayHelper;
 
+require_once( JPATH_ADMINISTRATOR.'/components/com_townoffical/tables/townoffical.php');
 /**
   * TownOfficals Controller
   *
@@ -88,11 +89,212 @@ class TownOfficalControllerTownOfficals extends JControllerAdmin
     // Check for request forgeries.
     $this->checkToken();
     
-    $files = $_FILES['jform'];
-    $tmp_name = $files['tmp_name']['file'];
-    //$fp = fopen($tmp_name,"r");
-                                  
-    //fclose($fp);
+    $input = Factory::getApplication()->input;
+    $files = $input->files->get('jform');
+    $use_csv_headers = $input->get('useCSVheader', '1', 'boolean' );
+    $field_sep       = $input->get('delimiter', ',', 'string');
+    $enclose_char    = $input->get('quote', '"', 'string');
+    $tmp_name        = $files['file']['tmp_name'];
+    $fp = fopen($tmp_name,"r");
+    $firstline = fgetcsv($fp,10*1024, $field_sep, $enclose_char);
+    $skipfirstline = false;
+    fclose($fp);
+    if ($use_csv_headers) {
+      $skipfirstline = true;
+      foreach($firstline as $h) {
+        if (trim($h) != "") {
+          $col = strtolower(trim($h));
+          if (in_array($col,array('auxoffice','name','termends','swornindate',
+                                  'ethicsexpires','iselected','email',
+                                  'telephone','notes','aux office','office',
+                                  "term ends","sworn in date","ethics expires",
+                                  "is elected",'e-mail','phone')))
+          {
+            switch ($col)
+            {
+            case 'aux office': $col = 'auxoffice'; break;
+            case 'term ends': $col = 'termends'; break;
+            case "sworn in date": $col = 'swornindate'; break;
+            case "ethics expires": $col = 'ethicsexpires'; break;
+            case "is elected": $col = 'iselected'; break;
+            case 'e-mail': $col = 'email'; break;
+            case 'phone': $col = 'telephone'; break;
+            default: break;
+            }
+            $columns[] = $col;
+          }
+          else
+          {
+            JError::raiseError(500, '<p>Undefined column: '.$h.'</p>');
+            return;
+          }
+        }
+      }
+      $manditorycolcount = 0;
+      foreach ($columns as $col) {
+        if (in_array($col,array('office','name','termends','iselected')))
+        {
+          $manditorycolcount++;
+        }
+      }
+      if ($manditorycolcount < 4) 
+      {
+        JError::raiseError(500, '<p>Some mandatory columns are missing!</p>');
+        return;
+      }  
+    }
+    else
+    {
+      switch (count($firstline)) {
+      case 4:
+        $columns = array('office','name','termends','iselected');
+        break;
+      case 5:
+        $columns = array('office','name','termends','iselected','email');
+        break;
+      case 6:
+        $columns = array('office','name','termends','iselected','email',
+                         'telephone');
+        break;
+      case 7:
+        $columns = array('office','name','termends','swornindate','iselected',
+                         'email','telephone');
+        break;
+      case 8:
+        $columns = array('office','name','termends','swornindate',
+                         'ethicsexpires','iselected','email','telephone');
+        break;
+      case 9:
+        $columns = array('office','name','termends','swornindate',
+                         'ethicsexpires','iselected','email','telephone',
+                         'notes');
+        break;
+      case 10:
+        $columns = array('office','name','termends','swornindate',
+                         'ethicsexpires','iselected','email','telephone',
+                         'notes','auxoffice');
+        break;
+      default:
+        JError::raiseError(500, '<p>Bad number of columns: '.
+                           count($firstline).'</p>');
+        return;
+      }
+    }
+    $indexes = array();
+    foreach ($columns as $i => $col) 
+    {
+      $indexes[$col] = $i;
+    }
+    $fp = fopen($tmp_name,"r");
+    if ($skipfirstline)
+    {
+      $dummy = fgetcsv($fp,10*1024, $field_sep, $enclose_char);
+    }
+    $db = JFactory::getDbo();
+    while ($line = fgetcsv($fp,10*1024, $field_sep, $enclose_char))
+    {
+      if (count($line) < count($columns))
+      {
+        continue; //skip short lines (ignore extra columns)
+      }
+      $offical = new TownOfficalTableTownOffical($db);
+      $offical_data = array();
+      foreach ($columns as $col) 
+      {
+        switch ($col)
+        {
+        case 'office':
+          $query = $db->getQuery(true);
+          $query->select('id');
+          $query->from('#__categories');
+          $query->where('extension = "com_townoffical" AND '
+                        .'title = '.$db->quote($line[$indexes['office']]));
+          $db->setQuery($query);
+          $catid = $db->loadResult();
+          if ($catid == null)
+          {
+            // new office (category)
+            $table = JTable::getInstance('category');
+            $data = array();
+            // name the category
+            $data['title'] = $line[$indexes['office']];
+            $data['path'] = preg_replace('/\s/','-',strtolower($line[$indexes['office']]));
+            // set what extension the category is for
+            $data['extension'] = 'com_townoffical';
+            // Set the category to be published by default
+            $data['published'] = 1;
+            // setLocation uses the parent_id and updates the nesting columns correctly
+            $table->setLocation($data['parent_id'], 'last-child');
+            // push our data into the table object
+            $table->bind($data);
+            // some data checks including setting the alias based on the name
+            if ($table->check()) {
+              // and store it!
+              $table->store();
+              // Success
+            } else {
+              // Error
+              JError::raiseError(500, "Category table check failed");
+              return;
+            }
+            $catid = $table->id;
+          }
+          $offical_data['catid'] = $catid;
+          break;
+        case 'name':
+          $query = $db->getQuery(true);
+          $query->select('a.id as id');
+          $query->from($db->quoteName('#__townoffical', 'a'));
+          $query->join('LEFT', $db->quoteName('#__categories', 'c') .
+                       ' ON c.id = a.catid');
+          $query->where('a.name = '.$db->quote($line[$indexes['name']]).' AND '.
+                        'c.title = '.$db->quote($line[$indexes['office']]));
+          $db->setQuery($query);
+          $id = $db->loadResult();
+          if ($id != null) 
+          {
+            $offical_data['id'] = $id;
+          }
+          else
+          {
+            $offical_data['name'] = $line[$indexes['name']];
+          }
+          break;
+        case 'iselected':
+          switch (strtolower($line[$indexes[$col]]))
+          {
+          case 1:
+          case 'true':
+          case 'yes':
+            $offical_data[$col] = 1;
+            break;
+          case 0:
+          case 'false':
+          case 'no':
+          default:
+            $offical_data[$col] = 0;
+            break;
+          }
+          break;
+        default:
+          $offical_data[$col] = $line[$indexes[$col]];
+          break;
+        }
+      }
+      $offical_data['published'] = 1;
+      $offical->bind($offical_data);
+      if ($offical->check()) 
+      {
+        $offical->store();
+      }
+      else
+      {
+        // Error
+        JError::raiseError(500, "Town Offical table check failed");
+        return;
+      }
+    }
+    fclose($fp);
     $this->setRedirect(Route::_('index.php?option=com_townoffical&view=townofficals', false));
   }
   private function getCsvData($data)

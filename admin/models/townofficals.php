@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:43:11 2022
- *  Last Modified : <220428.1222>
+ *  Last Modified : <220429.1814>
  *
  *  Description	
  *
@@ -111,7 +111,7 @@ class TownOfficalModelTownOfficals extends JModelList
     if (!empty($search))
     {
       $like = $db->quote('%' . $search . '%');
-      $query->where('name LIKE ' . $like);
+      $query->where('a.name LIKE ' . $like);
     }
     
     // Filter by published state
