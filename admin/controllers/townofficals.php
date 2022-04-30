@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 16:35:28 2022
- *  Last Modified : <220429.1908>
+ *  Last Modified : <220430.1054>
  *
  *  Description	
  *
@@ -218,7 +218,7 @@ class TownOfficalControllerTownOfficals extends JControllerAdmin
             $data = array();
             // name the category
             $data['title'] = $line[$indexes['office']];
-            $data['path'] = preg_replace('/\s/','-',strtolower($line[$indexes['office']]));
+            $data['language'] = '*';
             // set what extension the category is for
             $data['extension'] = 'com_townoffical';
             // Set the category to be published by default
@@ -276,12 +276,21 @@ class TownOfficalControllerTownOfficals extends JControllerAdmin
             break;
           }
           break;
+        case 'termends':
+        case 'swornindate':
+        case 'ethicsexpires':
+          try {
+            $date = new Date($line[$indexes[$col]]);
+          } catch(Exception $e) {
+            $date = new Date(DateTime::createFromFormat("m-d-Y",$line[$indexes[$col]])->format("d-m-Y"));
+          }
+          $offical_data[$col] = $date->toSql();
+          break;
         default:
           $offical_data[$col] = $line[$indexes[$col]];
           break;
         }
       }
-      $offical_data['published'] = 1;
       $offical->bind($offical_data);
       if ($offical->check()) 
       {
