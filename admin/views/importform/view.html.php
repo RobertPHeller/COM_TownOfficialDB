@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Thu Apr 28 13:37:30 2022
- *  Last Modified : <220428.1651>
+ *  Last Modified : <220430.1431>
  *
  *  Description	
  *
@@ -81,6 +81,8 @@ class townofficalViewimportform extends JViewLegacy
     
     JToolBarHelper::custom( 'townofficals.doimport', 'upload.png', 'upload.png', 'Import', false);
     JToolBarHelper::cancel('townofficals.cancel', 'JTOOLBAR_CLOSE');
+    JToolBarHelper::divider();
+    JToolBarHelper::help('ImportForm',true);
   }
   protected function setDocument() 
   {

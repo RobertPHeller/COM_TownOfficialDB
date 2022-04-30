@@ -5,3 +5,5 @@
 *.tcl
 *.bak
 *.csv
+admin/help/en-GB/*
+latex/*

@@ -2,7 +2,7 @@
 <!--
     Created By    : Robert Heller
     Created       : Wed Apr 20 12:48:00 2022
-    Last Modified : <220430.1215>
+    Last Modified : <220430.1433>
 
     Description	
     
@@ -36,7 +36,7 @@
   <copyright>(C) Copyright 2022 Robert Heller</copyright>
   <license>GPL 2.0 or later</license>
   <!--  The version string is recorded in the components table -->
-  <version>0.0.28</version>
+  <version>0.0.29</version>
   <!-- The description is optional and defaults to the name -->
   <description>COM_TOWNOFFICAL_DESCRIPTION</description>
   <!-- Runs on install/uninstall/update -->
@@ -102,6 +102,8 @@
       <folder>controllers</folder>
       <!-- helper files section -->
       <folder>helpers</folder>
+      <!-- help files section -->
+      <folder>help</folder>
     </files>
     <languages folder="admin/language">
       <language tag="en-GB">en-GB/en-GB.com_townoffical.ini</language>

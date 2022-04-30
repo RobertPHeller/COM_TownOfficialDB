@@ -10,3 +10,6 @@ townofficials.xml-orig
 *.list
 *.tcl
 *.csv
+Doxyfile
+docs/*
+latex/*

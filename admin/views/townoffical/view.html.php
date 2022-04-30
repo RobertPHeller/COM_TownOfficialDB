@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 16:37:54 2022
- *  Last Modified : <220422.1721>
+ *  Last Modified : <220430.1430>
  *
  *  Description	
  *
@@ -153,6 +153,8 @@ class TownOfficalViewTownOffical extends JViewLegacy
       }
       JToolBarHelper::cancel('townoffical.cancel', 'JTOOLBAR_CLOSE');
     }
+    JToolBarHelper::divider();
+    JToolBarHelper::help('TownOffical',true);
   }
   /**
     * Method to set up the document properties
