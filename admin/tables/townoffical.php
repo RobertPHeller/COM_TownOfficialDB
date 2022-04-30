@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:09:16 2022
- *  Last Modified : <220430.0839>
+ *  Last Modified : <220430.0926>
  *
  *  Description	
  *
@@ -139,15 +139,5 @@ class TownOfficalTableTownOffical extends JTable
       $assetParentId=$assetParent->id;
     }
     return $assetParentId;
-  }
-  public function check()
-  {
-    $this->alias = trim($this->alias);
-    if (empty($this->alias))
-    {
-      $this->alias = $this->greeting;
-    }
-    $this->alias = JFilterOutput::stringURLSafe($this->alias);
-    return true;
   }
 }
