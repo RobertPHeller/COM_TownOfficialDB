@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 16:41:56 2022
- *  Last Modified : <220423.1004>
+ *  Last Modified : <220430.0844>
  *
  *  Description	
  *
@@ -127,6 +127,51 @@ class TownOfficalModelTownOffical extends JModelAdmin
     }
     
     return $data;
+  }
+  /**
+    * Method to override the JModelAdmin save() function to handle Save as Copy correctly
+    *
+    * @param   The townoffical record data submitted from the form.
+    *
+    * @return  parent::save() return value
+    */
+  public function save($data)
+  {
+    $input = JFactory::getApplication()->input;
+    
+    JLoader::register('CategoriesHelper', JPATH_ADMINISTRATOR . '/components/com_categories/helpers/categories.php');
+    
+    // Validate the category id
+    // validateCategoryId() returns 0 if the catid can't be found
+    if ((int) $data['catid'] > 0)
+    {
+      $data['catid'] = CategoriesHelper::validateCategoryId($data['catid'], 'com_townoffical');
+    }
+    
+    // Alter the name and alias for save as copy
+    if ($input->get('task') == 'save2copy')
+    {
+      $origTable = clone $this->getTable();
+      $origTable->load($input->getInt('id'));
+      
+      if ($data['name'] == $origTable->name)
+      {
+        list($name, $alias) = $this->generateNewTitle($data['catid'], $data['alias'], $data['name']);
+        $data['name'] = $name;
+        $data['alias'] = $alias;
+      }
+      else
+      {
+        if ($data['alias'] == $origTable->alias)
+        {
+          $data['alias'] = '';
+        }
+      }
+      // standard Joomla practice is to set the new record as unpublished
+      $data['published'] = 0;
+    }
+    
+    return parent::save($data);
   }
   /**
     * Method to check if it's OK to delete a message. Overrides JModelAdmin::canDelete
