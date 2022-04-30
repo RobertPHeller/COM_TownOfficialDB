@@ -2,7 +2,7 @@
 <!--
     Created By    : Robert Heller
     Created       : Wed Apr 20 16:44:35 2022
-    Last Modified : <220422.1736>
+    Last Modified : <220430.1122>
 
     Description	
     
@@ -54,7 +54,7 @@
       type="text"
       label="COM_TOWNOFFICAL_TOWNOFFICAL_NAME_LABEL"
       description="COM_TOWNOFFICAL_TOWNOFFICAL_NAME_DESC"
-      size="40"
+      size="30"
       class="inputbox validate-name"
       default=""
       validate="name"

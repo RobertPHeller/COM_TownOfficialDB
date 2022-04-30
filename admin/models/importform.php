@@ -8,8 +8,8 @@
  *  Date          : $Date$
  *  Author        : $Author$
  *  Created By    : Robert Heller
- *  Created       : Thu Apr 21 15:28:07 2022
- *  Last Modified : <220428.1308>
+ *  Created       : Thu Apr 28 14:51:25 2022
+ *  Last Modified : <220428.1556>
  *
  *  Description	
  *
@@ -44,48 +44,18 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
-/**
-  * TownOffical component helper.
-  *
-  * @param   string  $submenu  The name of the active view.
-  *
-  * @return  void
-  *
-  * @since   1.6
-  */
-abstract class TownOfficalHelper extends JHelperContent
+class townofficalModelimportform extends JModelAdmin
 {
-  /**
-    * Configure the Linkbar.
-    *
-    * @return Bool
-    */
-  
-  public static function addSubmenu($submenu) 
+  public function getForm($data = array(), $loadData = true)
   {
-    JHtmlSidebar::addEntry(
-                           JText::_('COM_TOWNOFFICAL_SUBMENU_OFFICIALS'),
-                           'index.php?option=com_townoffical',
-                           $submenu == 'townofficals'
-                           );
-    
-    JHtmlSidebar::addEntry(
-                           JText::_('COM_TOWNOFFICAL_SUBMENU_OFFICES'),
-                           'index.php?option=com_categories&view=categories&extension=com_townoffical',
-                           $submenu == 'categories'
-                           );
-    
-    // Set some global property
-    $document = JFactory::getDocument();
-    $document->addStyleDeclaration('.icon-48-townoffical ' .
-                                   '{background-image: url(../media/com_townoffical/images/offical-48x48.png);}');
-    if ($submenu == 'categories') 
+    $form = $this->loadForm('com_townoffical.importform','importform',
+                            array('control' => 'jform',
+                                  'load_data' => $loadData));
+    if (empty($form))
     {
-      $document->setTitle(JText::_('COM_TOWNOFFICAL_ADMINISTRATION_OFFICES'));
+      return false;
     }
+    return $form;
   }
 }
 
-
-
-    

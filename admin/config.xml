@@ -2,7 +2,7 @@
 <!--
     Created By    : Robert Heller
     Created       : Fri Apr 22 12:41:21 2022
-    Last Modified : <220423.1213>
+    Last Modified : <220429.1429>
 
     Description	
     
@@ -61,6 +61,17 @@
       description="COM_TOWNOFFICAL_TOWNOFFICAL_FIELD_USER_TO_EMAIL_DESC"
       default="0"
       >
+    </field>
+    <field
+      name="csv_delimiter"
+      type="list"
+      label="COM_TOWNOFFICAL_CSV_DELIMITER_LABEL"
+      description="COM_TOWNOFFICAL_CSV_DELIMITER_DESC"
+      default=","
+      >
+      <option value=",">COM_TOWNOFFICAL_COMMA</option>
+      <option value=";">COM_TOWNOFFICAL_SEMICOLON</option>
+      <option value="\t">COM_TOWNOFFICAL_TAB</option>
     </field>
   </fieldset>
   <fieldset

@@ -8,8 +8,8 @@
  *  Date          : $Date$
  *  Author        : $Author$
  *  Created By    : Robert Heller
- *  Created       : Thu Apr 21 15:28:07 2022
- *  Last Modified : <220428.1308>
+ *  Created       : Thu Apr 28 13:37:30 2022
+ *  Last Modified : <220428.1651>
  *
  *  Description	
  *
@@ -44,48 +44,49 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
+// import Joomla view library
+jimport('joomla.application.component.view');
+
 /**
-  * TownOffical component helper.
+  * Get import information: file and delimeters, etc.
   *
-  * @param   string  $submenu  The name of the active view.
-  *
-  * @return  void
-  *
-  * @since   1.6
   */
-abstract class TownOfficalHelper extends JHelperContent
+
+class townofficalViewimportform extends JViewLegacy
 {
-  /**
-    * Configure the Linkbar.
-    *
-    * @return Bool
-    */
+  protected $canDo;
   
-  public static function addSubmenu($submenu) 
+  /**
+    * Import Form display method
+    * @return void
+    **/
+  function display($tpl = null)
   {
-    JHtmlSidebar::addEntry(
-                           JText::_('COM_TOWNOFFICAL_SUBMENU_OFFICIALS'),
-                           'index.php?option=com_townoffical',
-                           $submenu == 'townofficals'
-                           );
+    $this->form = $this->get('Form');
+    //set toolbar
+    $this->addToolBar();
+    // Display the template
+    parent::display($tpl);
     
-    JHtmlSidebar::addEntry(
-                           JText::_('COM_TOWNOFFICAL_SUBMENU_OFFICES'),
-                           'index.php?option=com_categories&view=categories&extension=com_townoffical',
-                           $submenu == 'categories'
-                           );
-    
-    // Set some global property
-    $document = JFactory::getDocument();
-    $document->addStyleDeclaration('.icon-48-townoffical ' .
-                                   '{background-image: url(../media/com_townoffical/images/offical-48x48.png);}');
-    if ($submenu == 'categories') 
-    {
-      $document->setTitle(JText::_('COM_TOWNOFFICAL_ADMINISTRATION_OFFICES'));
-    }
+    // Set the document
+    $this->setDocument();
   }
+  /**
+    * Setting the toolbar
+    */
+  protected function addToolBar() 
+  {
+    
+    JToolBarHelper::title(JText::_('COM_TOWNOFFICAL_IMPORT'));
+    
+    JToolBarHelper::custom( 'townofficals.doimport', 'upload.png', 'upload.png', 'Import', false);
+    JToolBarHelper::cancel('townofficals.cancel', 'JTOOLBAR_CLOSE');
+  }
+  protected function setDocument() 
+  {
+    $document = JFactory::getDocument();
+    $document->setTitle(JText::_('COM_TOWNOFFICAL_IMPORT'));
+  }
+  
 }
 
-
-
-    

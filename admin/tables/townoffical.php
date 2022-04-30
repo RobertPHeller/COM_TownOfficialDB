@@ -9,7 +9,6 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:09:16 2022
- *  Last Modified : <220422.1717>
  *
  *  Description	
  *
@@ -139,5 +138,34 @@ class TownOfficalTableTownOffical extends JTable
       $assetParentId=$assetParent->id;
     }
     return $assetParentId;
+  }
+  /**
+    * Overriden JTable::store to set modified data.
+    *
+    * @param   boolean  $updateNulls  True to update fields even if they are null.
+    *
+    * @return  boolean  True on success.
+    *
+    * @since   1.6
+    */
+  public function store($updateNulls = false)
+  {
+    $date = JFactory::getDate();
+    $user = JFactory::getUser();
+    
+    $this->modified = $date->toSql();
+    
+    if ($this->id)
+    {
+      // Existing item
+      $this->modified_by = $user->get('id');
+    }
+    else
+    {
+      // New town offical. 
+      $this->created = $date->toSql();
+      $this->created_by = $user->get('id');
+    }
+    return parent::store($updateNulls);
   }
 }
