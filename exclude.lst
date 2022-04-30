@@ -9,3 +9,4 @@ site-orig/*
 townofficials.xml-orig
 *.list
 *.tcl
+*.csv

@@ -2,7 +2,7 @@
 <!--
     Created By    : Robert Heller
     Created       : Thu Apr 21 11:10:34 2022
-    Last Modified : <220423.1234>
+    Last Modified : <220430.1244>
 
     Description	
     
@@ -43,6 +43,29 @@
       onchange="this.form.submit();"
       >
       <option value="">JOPTION_SELECT_PUBLISHED</option>
+    </field>
+    <field
+      name="catid"
+      type="category"
+      extension="com_townoffical"
+      default=""
+      label="COM_TOWNOFFICAL_TOWNOFFICAL_OFFICE_LABEL"
+      description="COM_TOWNOFFICAL_TOWNOFFICAL_OFFICE_DESC"
+      onchange="this.form.submit();"
+      >
+      <option value="">COM_TOWNOFFICAL_TOWNOFFICAL_SELECT_OFFICE</option>
+    </field>
+    <field
+      name="iselected"
+      type="list"
+      label="COM_TOWNOFFICAL_TOWNOFFICAL_ISELECTED_LABEL"
+      description="COM_TOWNOFFICAL_TOWNOFFICAL_ISELECTED_DESC"
+      onchange="this.form.submit();"
+      default=""
+      >
+      <option value="">COM_TOWNOFFICAL_TOWNOFFICAL_SELECT_ISELECTED</option>
+      <option value="1">COM_TOWNOFFICAL_TOWNOFFICAL_ISELECTED_OPTION</option>
+      <option value="0">COM_TOWNOFFICAL_TOWNOFFICAL_NOTELECTED_OPTION</option>
     </field>
   </fields>
   <fields name="list">

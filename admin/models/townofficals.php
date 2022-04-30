@@ -9,7 +9,7 @@
  *  Author        : $Author$
  *  Created By    : Robert Heller
  *  Created       : Wed Apr 20 14:43:11 2022
- *  Last Modified : <220429.1814>
+ *  Last Modified : <220430.1237>
  *
  *  Description	
  *
@@ -65,6 +65,7 @@ class TownOfficalModelTownOfficals extends JModelList
     {
       $config['filter_fields'] = array(
                                        'id',
+                                       'catid',
                                        'name',
                                        'author',
                                        'created',
@@ -124,6 +125,20 @@ class TownOfficalModelTownOfficals extends JModelList
     elseif ($published === '')
     {
       $query->where('(a.published IN (0, 1))');
+    }
+    // Filter by Office
+    $catid = $this->getState('filter.catid');
+    
+    if (is_numeric($catid))
+    {
+      $query->where('a.catid = ' . (int) $catid);
+    }
+    
+    // Filter by elected or not
+    $iselected = $this->getState('filter.iselected');
+    if (is_numeric($iselected))
+    {
+      $query->where('a.iselected = ' . (int) $iselected);
     }
     
     // Add the list ordering clause.
