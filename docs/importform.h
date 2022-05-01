@@ -44,24 +44,24 @@
 #define __IMPORTFORM_H
 
 /**
- * @page ImportForm Town Offical bulk import form
- * This page collects this information to import town offical records from a 
+ * @page ImportForm Town Official bulk import form
+ * This page collects this information to import town official records from a 
  * csv file:
  * - CSV file to upload The file to upload
  * - Use CSV Header Whether to use the first line as column headers
  * - CSV Delimiter The CSV delimiter
- * - CSV Quote character The CSV quote characted
+ * - CSV Quote character The CSV quote character
  * 
  * If you check the Use CSV Header, the first line of the file contains column
- * headers.  Recognozed headers are (case insensitive):
+ * headers.  Recognized headers are (case insensitive):
  * - auxoffice This is the member office (Chair, Clerk, etc.).
- * - name This is the offical's name.
- * - termends This is date (dd-mm-yyyy or mm-dd-yyyy) the offical's term ends.
- * - swornindate This is the date the offical was sworn in.
- * - ethicsexpires This is the date the offical's ethics certification expires.
- * - iselected whether the offical position is elected (can be yes, no, true, false, 1, or 0).
- * - email The offical's email address.
- * - telephone The offical's phone number.
+ * - name This is the official's name.
+ * - termends This is date (dd-mm-yyyy or mm-dd-yyyy) the official's term ends.
+ * - swornindate This is the date the official was sworn in.
+ * - ethicsexpires This is the date the official's ethics certification expires.
+ * - iselected whether the official position is elected (can be yes, no, true, false, 1, or 0).
+ * - email The official's email address.
+ * - telephone The official's phone number.
  * - notes Additional notes.
  * - "aux office" (alias for auxoffice)
  * - office
@@ -72,7 +72,7 @@
  * - e-mail (alias for email)
  * - phone (alias telephone)
  * 
- * The columns office, name, termends, iselected are manditory.
+ * The columns office, name, termends, iselected are mandatory.
  * 
  * If the Use CSV Header checkbox is not checked, the columns are assumed to 
  * be this order:

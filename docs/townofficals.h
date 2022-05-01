@@ -47,7 +47,7 @@
  * @page TownOfficals Town Offical Listing
  * This is the listing of town officials and their offices.  There are two
  * submenu items:
- * - Town Officals These are the officals themselves
+ * - Town Officals These are the officials themselves
  * - Offices These are the offices they hold.
  * @section offics_officals Town Officals page
  * This page contains the listing of town officals.
@@ -65,10 +65,10 @@
  * - row number
  * - checkbox
  * - Office This is the office.
- * - Name This is the offical's name.  It can be clicked on to display or edit
- *   The offical's data record.
+ * - Name This is the official's name.  It can be clicked on to display or edit
+ *   The official's data record.
  * - Member Office This is the member office.
- * - Term ends This is date the offical's current term ends.  If the term has 
+ * - Term ends This is date the official's current term ends.  If the term has 
  *   already ended, it is displayed in red.
  * - Is Elected? Whether the office is elected or appointed.
  * - Created by The Joomla user who created this record.
@@ -84,17 +84,17 @@
  * - Import This bulk imports officals from a CSV file
  * - Export This bulk exports officals to a CSV file
  * - Check-in This checks in officals whose data record has been checked out
- * - Publish This publishes an offical's record
- * - Unpublish This unpublishes an offical's record
+ * - Publish This publishes an official's record
+ * - Unpublish This unpublishes an official's record
  * - Help This provides help (documentation)
  * - Options This allows editing the parameter settings
  * @subsubsection offics_officals_toolbar_new Create a new offical
  * 
- * This button opens a @ref TownOffical where a new offical's record can
+ * This button opens a @ref TownOffical where a new official's record can
  * be entered.
  * 
  * @subsubsection offics_officals_toolbar_edit Edit an existing offical
- * This button opens a @ref TownOffical where an existing offical's record can
+ * This button opens a @ref TownOffical where an existing official's record can
  * be edited.
  * 
  * @subsubsection offics_officals_toolbar_delete Delete selected officals
@@ -113,7 +113,7 @@
  * @subsubsection offics_officals_toolbar_publish Publish selected officals
  * This button will publish selected officals.
  * 
- * @subsubsection offics_officals_toolbar_unpublish Unpublist selected officals
+ * @subsubsection offics_officals_toolbar_unpublish Unpublish selected officals
  * This button will unpublish selected officals.
  * 
  * @subsubsection offics_officals_toolbar_help Get documentation

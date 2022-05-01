@@ -45,19 +45,19 @@
 
 /**
  * @page TownOffical Town Offical Details form
- * This page displays and allows for entering and editing a town offical's
+ * This page displays and allows for entering and editing a town official's
  * record.  This information includes:
- * - Office This is a dropdown from the Offices list.
+ * - Office This is a drop down from the Offices list.
  * - Name   This is the name of the Offical.
  * - Member Office This is a title within the Office. Typically this would be 
  *   something like Chair or Clerk, but it could include other possibilities
- * - Term Ends This is the date that the officals current term ends.
+ * - Term Ends This is the date that the officials current term ends.
  * - Sworn in date This is the date the offical was last sworn in.
- * - Ethics Expires This is the date the offical's ethics certification expired.
- * - Is Elected? This indicates if the offical's position is an elected one.
- * - EMail This is the offical's E-Mail address.
- * - Telephone This is the offical's telephone number.
- * - Notes This is any addional notes.
+ * - Ethics Expires This is the date the official's ethics certification expired.
+ * - Is Elected? This indicates if the official's position is an elected one.
+ * - EMail This is the official's E-Mail address.
+ * - Telephone This is the official's telephone number.
+ * - Notes This is any additional notes.
  * 
  **/
 
